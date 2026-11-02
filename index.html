@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marshal Sebastine · KI-Systeme &amp; Echtzeit-Backends</title>
+<meta name="description" content="Portfolio von Marshal Sebastine: KI-gestützte Prüfung (ExamReview), Industrie-4.0-Echtzeitdaten, Hexnode-Geräteverwaltung und eine Low-Code-Runtime. M.Sc. AI, OTH Amberg-Weiden.">
+<link rel="canonical" href="https://marshalsebastine.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://marshalsebastine.github.io/">
+<meta property="og:title" content="Marshal Sebastine · KI-Systeme &amp; Echtzeit-Backends">
+<meta property="og:description" content="Vier Projekte mit Video, interaktiven Diagrammen und Live-Demo: ExamReview, Smart Factory, Hexnode-Ökosystem, Low-Code Runtime.">
+<meta property="og:image" content="https://marshalsebastine.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Marshal Sebastine">
+<meta name="theme-color" content="#0b6b5d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b6b5d'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='26' text-anchor='middle' fill='%23f4f6f3'%3EMS%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Layout: engineering-sheet portfolio. A title-block hero, then four project "sheets" separated by hairline rules; media runs wide, text stays at reading width. */
+:root {
+  --paper: #f4f6f3;
+  --surface: #ffffff;
+  --sunk: #e9ede8;
+  --ink: #141a18;
+  --ink-2: #3c4642;
+  --mute: #66716c;
+  --line: #d4dbd5;
+  --accent: #0b6b5d;
+  --accent-soft: #dcefe9;
+  --accent-ink: #064a40;
+  --warn: #a8640c;
+  --warn-soft: #fbedd5;
+  --crit: #b23a2c;
+  --crit-soft: #f8e1dd;
+  --info: #2b5c9a;
+  --info-soft: #e1ebf7;
+  --wire: #9aa7a1;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step-0: 1rem; --step-1: 1.2rem; --step-2: 1.55rem; --step-3: 2.1rem; --step-4: clamp(2.5rem, 6vw, 4.4rem);
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0f1312; --surface: #171d1b; --sunk: #1d2422; --ink: #e6ebe8; --ink-2: #c3ccc8; --mute: #8e9a95; --line: #2b3431;
+  --accent: #5cc6ae; --accent-soft: #15322c; --accent-ink: #a9e6d6; --warn: #e3a64a; --warn-soft: #3a2a12; --crit: #ec8a7c; --crit-soft: #3d1d18;
+  --info: #8fb6e8; --info-soft: #1b2a3d; --wire: #56635e; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0f1312; --surface: #171d1b; --sunk: #1d2422; --ink: #e6ebe8; --ink-2: #c3ccc8; --mute: #8e9a95; --line: #2b3431;
+  --accent: #5cc6ae; --accent-soft: #15322c; --accent-ink: #a9e6d6; --warn: #e3a64a; --warn-soft: #3a2a12; --crit: #ec8a7c; --crit-soft: #3d1d18;
+  --info: #8fb6e8; --info-soft: #1b2a3d; --wire: #56635e; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.site[data-lang="de"] [lang="en"], .site[data-lang="en"] [lang="de"] { display: none !important; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 112%; line-height: 1.1; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.label { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+.prose { max-width: 66ch; color: var(--ink-2); display: grid; gap: 0.9rem; }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* header */
+.top { border-bottom: 1px solid var(--line); background: var(--paper); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.brand { font-family: var(--f-display); font-weight: 700; font-stretch: 118%; font-size: 1.05rem; color: var(--ink); text-decoration: none; letter-spacing: 0.01em; }
+.nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.nav a { color: var(--ink-2); text-decoration: none; font-size: 0.95rem; }
+.nav a:hover { color: var(--accent); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.lang button { font: 500 0.78rem var(--f-mono); letter-spacing: 0.06em; border: 0; background: transparent; color: var(--mute); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 80px) clamp(32px, 5vw, 56px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: clamp(24px, 5vw, 64px); align-items: start; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; font-stretch: 120%; letter-spacing: -0.02em; }
+.hero .role { font-family: var(--f-display); font-stretch: 100%; font-size: var(--step-2); font-weight: 500; color: var(--accent); margin-top: 14px; max-width: 26ch; }
+.hero .lead { margin-top: 20px; font-size: 1.08rem; color: var(--ink-2); max-width: 60ch; }
+.links { display: flex; gap: 10px 18px; flex-wrap: wrap; margin-top: 22px; align-items: center; }
+.links a { font-weight: 500; }
+.portrait-wrap { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--sunk); }
+.portrait { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; filter: contrast(1.06) saturate(.9); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.portrait-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(10, 16, 14, .16) 0%, rgba(10, 16, 14, .22) 45%, rgba(10, 16, 14, .62) 100%); transition: opacity .6s; }
+.portrait-wrap:hover::after { opacity: .55; }
+.portrait-wrap:hover .portrait { transform: scale(1.03); }
+.tblock { margin-top: 14px; border: 1px solid var(--ink); font-size: 0.86rem; background: var(--surface); }
+.tblock div { display: grid; grid-template-columns: 96px minmax(0, 1fr); border-top: 1px solid var(--line); }
+.tblock div:first-child { border-top: 0; }
+.tblock dt, .tblock dd { margin: 0; padding: 6px 9px; }
+.tblock dt { font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--mute); border-right: 1px solid var(--line); display: flex; align-items: center; }
+.tblock dd { color: var(--ink); }
+
+/* project index */
+.index { border-top: 1px solid var(--ink); }
+.index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.index li { border-right: 1px solid var(--line); }
+.index li:last-child { border-right: 0; }
+.index a { display: grid; gap: 6px; padding: 16px 16px 18px 0; text-decoration: none; color: var(--ink); height: 100%; }
+.index li + li a { padding-left: 16px; }
+.index a:hover .t { color: var(--accent); }
+.index .t { font-family: var(--f-display); font-weight: 700; font-stretch: 108%; font-size: 1.1rem; line-height: 1.2; }
+.index .d { font-size: 0.88rem; color: var(--mute); }
+
+/* project sheets */
+.sheet { border-top: 1px solid var(--ink); padding-block: clamp(40px, 6vw, 72px); }
+.sheet-head { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 12px 32px; margin-bottom: 28px; }
+.meta { display: grid; gap: 4px; align-content: start; }
+.meta .no { font-family: var(--f-mono); font-size: 0.8rem; color: var(--accent); }
+.meta .org { font-weight: 600; font-size: 0.95rem; }
+.meta .when { font-size: 0.88rem; color: var(--mute); }
+.sheet h2 { font-size: var(--step-3); font-weight: 750; }
+.sheet .kicker { font-size: 1.08rem; color: var(--ink-2); margin-top: 10px; max-width: 62ch; }
+.body { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; }
+.body > .side { display: grid; gap: 18px; align-content: start; }
+.body > .main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; min-width: 0; }
+.side .facts { display: grid; gap: 14px; }
+.side .fact .v { font-family: var(--f-display); font-stretch: 110%; font-weight: 750; font-size: 1.9rem; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.side .fact .k { font-size: 0.86rem; color: var(--mute); margin-top: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--f-mono); font-size: 0.74rem; padding: 3px 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink-2); background: var(--surface); white-space: nowrap; }
+h3 { font-size: var(--step-1); font-weight: 700; margin-bottom: 12px; }
+
+figure { margin: 0; }
+.shot { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.shot img, .shot video { display: block; width: 100%; height: auto; max-width: 100%; }
+figcaption { font-size: 0.86rem; color: var(--mute); margin-top: 8px; }
+.note { font-size: 0.86rem; color: var(--mute); }
+
+.mine { border: 1px solid var(--accent); background: var(--accent-soft); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 8px; max-width: 70ch; }
+.mine .label { color: var(--accent-ink); }
+.mine p { color: var(--ink); }
+
+/* ExamReview stepper */
+.steps { display: flex; gap: 6px; flex-wrap: wrap; }
+.steps button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font: 500 0.88rem var(--f-body); color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 12px; cursor: pointer; }
+.steps button .n { font-family: var(--f-mono); font-size: 0.74rem; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--wire); display: inline-grid; place-items: center; color: var(--mute); }
+.steps button[aria-selected="true"] { border-color: var(--ink); color: var(--ink); }
+.steps button[aria-selected="true"] .n { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.stage { margin-top: 12px; display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 20px; align-items: start; }
+.stage .cap { display: grid; gap: 10px; }
+.stage .cap .de-term { font-family: var(--f-mono); font-size: 0.8rem; color: var(--accent); }
+.stage .cap h4 { margin: 0; font-family: var(--f-display); font-stretch: 108%; font-size: 1.15rem; }
+.stage .cap p { font-size: 0.95rem; color: var(--ink-2); }
+.sev { display: flex; gap: 6px; flex-wrap: wrap; }
+.sev span { font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+.sev .h { background: var(--crit-soft); color: var(--crit); }
+.sev .w { background: var(--warn-soft); color: var(--warn); }
+.sev .i { background: var(--info-soft); color: var(--info); }
+
+/* flow diagrams (HTML) */
+.flow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; align-items: stretch; }
+.flow .node { border: 1px solid var(--wire); border-radius: var(--radius); background: var(--surface); padding: 12px; display: grid; gap: 4px; align-content: start; position: relative; }
+.flow .node + .node { margin-left: 26px; }
+.flow .node + .node::before { content: ""; position: absolute; left: -24px; top: 50%; width: 20px; border-top: 1.5px solid var(--wire); }
+.flow .node + .node::after { content: ""; position: absolute; left: -9px; top: calc(50% - 4px); border: 4.5px solid transparent; border-left: 6px solid var(--wire); border-right: 0; }
+.flow .node b { font-family: var(--f-display); font-stretch: 105%; font-size: 0.98rem; }
+.flow .node span { font-size: 0.83rem; color: var(--mute); line-height: 1.45; }
+.flow .node.me { border-color: var(--accent); background: var(--accent-soft); }
+.flow .node.me b { color: var(--accent-ink); }
+.flow .node .tag { font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.video-link { display: inline-flex; gap: 8px; align-items: center; font-weight: 500; }
+
+/* Hexnode ecosystem */
+.eco { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.eco-tabs { display: flex; gap: 6px; padding: 12px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.eco-tabs button { flex: 0 0 auto; font: 500 0.88rem var(--f-body); border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.eco-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.eco-canvas { overflow-x: auto; padding: 8px 4px 0; }
+.eco svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.eco svg .n rect { fill: var(--paper); stroke: var(--wire); stroke-width: 1; transition: fill .3s, stroke .3s; }
+.eco svg .n.mine rect { stroke: var(--accent); }
+.eco svg .n.on rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.eco svg .n.ext rect { stroke-dasharray: 0; }
+.eco svg .tt { font: 600 14px var(--f-body); fill: var(--ink); }
+.eco svg .ts { font: 400 12px var(--f-body); fill: var(--mute); }
+.eco svg .tm { font: 500 10.5px var(--f-mono); fill: var(--accent); letter-spacing: .06em; }
+.eco svg .e { fill: none; stroke: var(--wire); stroke-width: 1.4; transition: stroke .3s, stroke-width .3s; }
+.eco svg .e.on { stroke: var(--accent); stroke-width: 2.6; }
+.eco svg .e.p2p { stroke-dasharray: 5 5; }
+.eco svg .el { font: 500 11px var(--f-mono); fill: var(--mute); }
+.eco svg .el.on { fill: var(--accent); }
+.eco svg .box { fill: none; stroke: var(--wire); stroke-dasharray: 4 4; }
+.eco svg .pulse { fill: var(--accent); }
+.eco-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding: 14px 16px 16px; border-top: 1px solid var(--line); align-items: start; }
+.eco-steps { margin: 0; padding-left: 1.3rem; display: grid; gap: 4px; font-size: 0.92rem; color: var(--mute); }
+.eco-steps li.on { color: var(--ink); }
+.eco-steps li.done { color: var(--ink-2); }
+.replay { font: 500 0.85rem var(--f-body); border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+.comp { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.comp div { border-top: 2px solid var(--accent); padding-top: 10px; display: grid; gap: 4px; }
+.comp b { font-family: var(--f-display); font-stretch: 105%; }
+.comp span { font-size: 0.88rem; color: var(--ink-2); }
+.comp small { font-family: var(--f-mono); font-size: 0.72rem; color: var(--mute); }
+
+/* Low-code demo */
+.lc { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.lc-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.lc-bar .presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.lc-bar button { font: 500 0.82rem var(--f-body); border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); border-radius: var(--radius); padding: 5px 10px; cursor: pointer; }
+.lc-bar button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+.lc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.lc-code { border-right: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr auto; min-width: 0; background: var(--sunk); }
+.lc-code .label, .lc-out .label { padding: 10px 12px 0; }
+.lc textarea { width: 100%; min-height: 380px; border: 0; resize: vertical; background: transparent; color: var(--ink); font: 400 0.8rem/1.55 var(--f-mono); padding: 10px 12px; tab-size: 2; }
+.lc textarea:focus-visible { outline-offset: -2px; }
+.lc .err { font-size: 0.82rem; color: var(--crit); padding: 0 12px 10px; min-height: 1.4em; }
+.lc-out { min-width: 0; display: grid; grid-template-rows: auto 1fr; }
+.preview { padding: 14px 16px 18px; display: grid; gap: 12px; align-content: start; }
+/* rendered components get their own small UI kit, so they read as "a generated app" */
+.rt-h { font: 600 1.15rem var(--f-body); margin: 0; }
+.rt-p { font-size: 0.9rem; color: var(--ink-2); }
+.rt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.rt-field { display: grid; gap: 4px; font-size: 0.85rem; }
+.rt-field label { font-weight: 500; color: var(--ink); }
+.rt-field input, .rt-field select { font: 400 0.9rem var(--f-body); height: 36px; padding: 0 9px; border: 1px solid var(--wire); border-radius: 4px; background: var(--paper); color: var(--ink); min-width: 0; width: 100%; }
+.rt-field.bad input, .rt-field.bad select { border-color: var(--crit); }
+.rt-field .msg { color: var(--crit); font-size: 0.78rem; }
+.rt-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.rt-btn { font: 500 0.88rem var(--f-body); border-radius: 4px; padding: 8px 14px; cursor: pointer; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); }
+.rt-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.rt-table { overflow-x: auto; }
+.rt-table table { border-collapse: collapse; width: 100%; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.rt-table th, .rt-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.rt-table th { font-weight: 600; color: var(--mute); font-size: 0.78rem; }
+.rt-toast { border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent-ink); border-radius: 4px; padding: 8px 10px; font-size: 0.86rem; }
+.rt-unknown { font: 0.8rem var(--f-mono); color: var(--warn); border: 1px dashed var(--warn); padding: 6px 8px; border-radius: 4px; }
+
+/* experience + skills */
+.cv { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; }
+.tl li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.tl li:first-child { border-top: 0; padding-top: 0; }
+.tl .when { font-family: var(--f-mono); font-size: 0.8rem; color: var(--mute); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.tl b { display: block; font-weight: 600; }
+.tl span { color: var(--ink-2); font-size: 0.93rem; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.skills h3 { font-size: 1rem; margin-bottom: 10px; }
+
+.contact .wrap { display: grid; gap: 18px; }
+.contact h2 { font-size: var(--step-3); }
+.contact-row { display: flex; gap: 12px 28px; flex-wrap: wrap; align-items: center; font-size: 1.05rem; }
+.mail { font-family: var(--f-mono); font-size: 0.98rem; user-select: all; }
+.copy { font: 500 0.8rem var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: var(--radius); padding: 4px 10px; cursor: pointer; }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 20px 32px; font-size: 0.82rem; color: var(--mute); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-side { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .tblock { margin-top: 0; }
+  .index ol { grid-template-columns: 1fr 1fr; }
+  .index li:nth-child(2) { border-right: 0; }
+  .index li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .index li:nth-child(3) a { padding-left: 0; }
+  .sheet-head, .body, .cv { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .side .facts { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-auto-flow: row; grid-auto-columns: auto; }
+  .flow .node + .node { margin-left: 0; margin-top: 22px; }
+  .flow .node + .node::before { left: 50%; top: -20px; width: 0; height: 16px; border-top: 0; border-left: 1.5px solid var(--wire); }
+  .flow .node + .node::after { left: calc(50% - 4px); top: -8px; border: 4.5px solid transparent; border-top: 6px solid var(--wire); border-bottom: 0; }
+  .two { grid-template-columns: minmax(0, 1fr); }
+  .lc-grid { grid-template-columns: minmax(0, 1fr); }
+  .lc-code { border-right: 0; border-bottom: 1px solid var(--line); }
+  .lc textarea { min-height: 260px; }
+}
+@media (max-width: 520px) {
+  .hero-side { grid-template-columns: 1fr; }
+  .portrait-wrap { max-width: 200px; }
+  .index ol { grid-template-columns: 1fr; }
+  .index li { border-right: 0 !important; border-top: 1px solid var(--line); }
+  .index li:first-child { border-top: 0; }
+  .index li a { padding-left: 0 !important; }
+  .tl li { grid-template-columns: 1fr; gap: 2px; }
+  .eco-foot { grid-template-columns: 1fr; }
+}
+
+/* ---------- motion layer ---------- */
+html { scroll-behavior: smooth; }
+section, .index { scroll-margin-top: 72px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--paper); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--paper) 84%, transparent); -webkit-backdrop-filter: saturate(1.3) blur(12px); backdrop-filter: saturate(1.3) blur(12px); transition: box-shadow .3s; }
+.top .wrap { transition: padding .3s; }
+.top.scrolled .wrap { padding-block: 9px; }
+.top.scrolled { box-shadow: 0 1px 0 var(--line), 0 12px 30px -22px color-mix(in srgb, var(--ink) 45%, transparent); }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+.nav a { position: relative; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.nav a:hover::after, .nav a.cur::after { transform: scaleX(1); }
+.nav a.cur { color: var(--ink); }
+
+.hero { position: relative; overflow: hidden; }
+#traces { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 75% 95% at 80% 45%, #000 25%, transparent 82%); mask-image: radial-gradient(ellipse 75% 95% at 80% 45%, #000 25%, transparent 82%); }
+.hero > .wrap { position: relative; }
+.hero h1 .ch { display: inline-block; animation: stretchIn 1.2s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i) * 45ms + 80ms); transition: font-stretch .45s cubic-bezier(.2,.8,.2,1), color .3s; }
+.hero h1 .ch:hover { font-stretch: 62%; color: var(--accent); }
+@keyframes stretchIn { from { opacity: 0; font-stretch: 62%; transform: translateY(40%); } to { opacity: 1; font-stretch: 120%; transform: none; } }
+.intro { animation: rise .9s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: var(--d, 0ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.wipe { animation: wipe 1.25s cubic-bezier(.7,0,.2,1) .25s backwards; }
+@keyframes wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+.marquee { overflow: hidden; border-top: 1px solid var(--line); padding-block: 16px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.mq-track { display: flex; width: max-content; animation: mq 46s linear infinite; }
+.marquee:hover .mq-track { animation-play-state: paused; }
+.mq-track span { font-family: var(--f-display); font-stretch: 125%; font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.7rem); line-height: 1.1; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px var(--wire); }
+.mq-track span:nth-child(3n+1) { color: var(--ink); -webkit-text-stroke: 0; }
+.mq-track span::after { content: "/"; display: inline-block; margin: 0 .55em; color: var(--accent); -webkit-text-stroke: 0; font-stretch: 100%; font-weight: 400; }
+@keyframes mq { to { transform: translateX(-50%); } }
+
+.index li { position: relative; overflow: hidden; }
+.index li::before { content: ""; position: absolute; inset: 0; background: var(--accent-soft); transform: translateY(101%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.index li:hover::before { transform: none; }
+.index a { position: relative; }
+.index .t::after { content: " →"; display: inline-block; opacity: 0; transform: translateX(-8px); transition: opacity .3s, transform .3s; color: var(--accent); }
+.index a:hover .t::after { opacity: 1; transform: none; }
+
+.rv { opacity: .4; transform: translateY(42px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); transition-delay: var(--rd, 0ms); }
+.rv.in { opacity: 1; transform: none; }
+
+.chip { transition: border-color .2s, color .2s, transform .2s; }
+.chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+.shot.tilt { position: relative; transform: perspective(1400px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s; will-change: transform; }
+.shot.tilt:hover { box-shadow: 0 26px 50px -26px color-mix(in srgb, var(--ink) 40%, transparent); }
+.shot.tilt::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, #ffffff 22%, transparent), transparent 45%); opacity: 0; transition: opacity .4s; }
+.shot.tilt:hover::after { opacity: 1; }
+
+.flow .node { transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s; }
+.flow .node:hover { transform: translateY(-3px); border-color: var(--accent); }
+.flow .node + .node::before { border-top: 0; height: 2px; top: calc(50% - 1px); background: repeating-linear-gradient(90deg, var(--wire) 0 5px, transparent 5px 9px); background-size: 18px 2px; animation: antsX .8s linear infinite; }
+@keyframes antsX { to { background-position: 18px 0; } }
+@keyframes antsY { to { background-position: 0 18px; } }
+.flow .node.me { animation: glow 2.6s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); } 60% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent); } }
+
+.steps button { position: relative; overflow: hidden; transition: border-color .25s, color .25s, transform .2s; }
+.steps button:hover { transform: translateY(-1px); }
+.steps.auto button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--accent); transform-origin: left; animation: fillbar 5.5s linear both; }
+@keyframes fillbar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.comp div { border-top: 0; padding-top: 12px; position: relative; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.comp div::before { content: ""; position: absolute; top: 0; left: 0; height: 2px; width: 36px; background: var(--accent); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.comp div:hover::before { width: 100%; }
+
+.eco svg .e.p2p { animation: dash 1.1s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -20; } }
+.eco svg .trail { fill: var(--accent); }
+.eco svg .ring { fill: none; stroke: var(--accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+.eco svg .pulse { filter: drop-shadow(0 0 5px var(--accent)); }
+.eco-tabs button { transition: background .25s, color .25s, border-color .25s, transform .2s; }
+.eco-tabs button:hover { transform: translateY(-1px); }
+
+.mine { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.mine:hover { transform: translateX(4px); }
+.contact h2 > span { background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 4px no-repeat; transition: background-size 1s cubic-bezier(.2,.8,.2,1) .2s; padding-bottom: 4px; }
+.contact h2.in > span, .contact h2:not(.rv) > span { background-size: 100% 4px; }
+.copy, .replay, .lc-bar button { transition: transform .15s, border-color .2s; }
+.copy:active, .replay:active, .lc-bar button:active, .rt-btn:active { transform: scale(.96); }
+
+
+/* ---------- scroll-linked layer ---------- */
+.sheet { border-top: 0; position: relative; overflow: clip; }
+.sheet::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--ln, 1)); }
+.sheet > .wrap { position: relative; z-index: 1; }
+.wm { position: absolute; right: max(16px, 3vw); top: 28px; z-index: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 125%; font-size: clamp(7rem, 20vw, 17rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px var(--line); pointer-events: none; user-select: none; translate: 0 calc((var(--pp, .5) - .5) * -240px); }
+.sheet h2 { font-stretch: calc(72% + 40% * var(--hs, 1)); }
+.sc { scale: calc(.93 + .07 * var(--sp, 1)); transform-origin: 50% 100%; }
+.sc img { scale: calc(1 + .1 * (1 - var(--sp, 1))); }
+.mq-track span { display: inline-block; transform: skewX(var(--skew, 0deg)); }
+.tl { position: relative; padding-left: 26px; }
+.tl::before, .tl::after { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+.tl::after { background: var(--accent); transform-origin: 50% 0; transform: scaleY(var(--tp, 1)); }
+.tl li { position: relative; }
+.tl li::before { content: ""; position: absolute; left: -26px; top: 19px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--wire); z-index: 1; transition: background .4s, border-color .4s, transform .4s; }
+.tl li:first-child::before { top: 5px; }
+.tl li.lit::before { background: var(--accent); border-color: var(--accent); transform: scale(1.15); }
+@media (max-width: 860px) {
+  .flow .node + .node::before { top: -20px; height: 16px; width: 2px; left: calc(50% - 1px); border-left: 0; background: repeating-linear-gradient(180deg, var(--wire) 0 5px, transparent 5px 9px); background-size: 2px 18px; animation-name: antsY; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="site" id="site" data-lang="de">
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#start">Marshal Sebastine</a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#projekte"><span lang="de">Projekte</span><span lang="en">Projects</span></a>
+      <a href="#erfahrung"><span lang="de">Werdegang</span><span lang="en">Experience</span></a>
+      <a href="#kontakt"><span lang="de">Kontakt</span><span lang="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button type="button" id="lang-de" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main id="start">
+<section class="hero">
+  <canvas id="traces" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="label intro" style="--d:0ms"><span lang="de">Portfolio · Softwareentwicklung &amp; KI</span><span lang="en">Portfolio · Software engineering &amp; AI</span></div>
+      <h1 id="hero-name" style="margin-top:14px" aria-label="Marshal Sebastine">Marshal Sebastine</h1>
+      <p class="role intro" style="--d:650ms" lang="de">Ich baue KI-Prüfsysteme und Echtzeit-Backends, die im Betrieb laufen.</p>
+      <p class="role intro" style="--d:650ms" lang="en">I build AI review systems and real-time backends that run in production.</p>
+      <p class="lead intro" style="--d:800ms" lang="de">Über vier Jahre Softwareentwicklung mit Python, Node.js und TypeScript: Geräteverwaltung für über 100.000 Geräte bei Hexnode, eine Low-Code-Rendering-Engine bei Ramco, Industrie-4.0-Datenpipelines an der OTH Amberg-Weiden und zuletzt ein KI-gestütztes Prüfwerkzeug für Pflegeprüfungen in der Digitalschmiede Bayern. Ich studiere M.Sc. Artificial Intelligence for Industrial Applications und suche eine Werkstudentenstelle in KI und agentischen Systemen.</p>
+      <p class="lead intro" style="--d:800ms" lang="en">Four-plus years of software engineering in Python, Node.js and TypeScript: device management for 100,000+ devices at Hexnode, a low-code rendering engine at Ramco, Industry 4.0 data pipelines at OTH Amberg-Weiden, and most recently an AI-assisted review tool for nursing exams at Digitalschmiede Bayern. I'm studying for an M.Sc. in Artificial Intelligence for Industrial Applications and looking for a working-student role in AI and agentic systems.</p>
+      <div class="links intro" style="--d:950ms">
+        <a href="https://www.linkedin.com/in/marshal-sebastine/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/marshalSebastine" target="_blank" rel="noopener">GitHub</a>
+        <a href="#kontakt"><span lang="de">E-Mail</span><span lang="en">Email</span></a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="portrait-wrap wipe"><img class="portrait" src="media/portrait.webp" width="960" height="1200" alt="Porträt von Marshal Sebastine" data-alt-en="Portrait of Marshal Sebastine"></div>
+      <dl class="tblock intro" style="--d:1050ms">
+        <div><dt><span lang="de">Standort</span><span lang="en">Based in</span></dt><dd>Nürnberg</dd></div>
+        <div><dt><span lang="de">Verfügbar</span><span lang="en">Available</span></dt><dd><span lang="de">ab sofort · 16–20 Std./Woche</span><span lang="en">now · 16–20 h/week</span></dd></div>
+        <div><dt><span lang="de">Einsatz</span><span lang="en">Where</span></dt><dd><span lang="de">Nürnberg, München oder remote</span><span lang="en">Nuremberg, Munich or remote</span></dd></div>
+        <div><dt><span lang="de">Studium</span><span lang="en">Studies</span></dt><dd>M.Sc. AI, OTH Amberg-Weiden</dd></div>
+        <div><dt><span lang="de">Sprachen</span><span lang="en">Languages</span></dt><dd><span lang="de">Deutsch B2 · Englisch C1</span><span lang="en">German B2 · English C1</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"><span>Python</span><span>FastAPI</span><span>OPC UA</span><span>MQTT</span><span>WebRTC</span><span>Structured Outputs</span><span>LLM-as-judge</span><span>Electron</span><span>Swift</span><span>React</span><span>TypeScript</span><span>Socket.IO</span><span>Docker</span><span>asyncio</span></div></div>
+
+<nav class="index wrap" id="projekte" aria-label="Projekte">
+  <ol>
+    <li><a href="#examreview"><span class="label">2026 · byte</span><span class="t">ExamReview</span><span class="d" lang="de">KI-gestützte Prüfung von Prüfungsentwürfen</span><span class="d" lang="en">AI-assisted review of exam drafts</span></a></li>
+    <li><a href="#smart-factory"><span class="label"><span lang="de">seit</span><span lang="en">since</span> 2025 · OTH</span><span class="t">Smart Factory</span><span class="d" lang="de">Echtzeitdaten aus einer Industrie-4.0-Anlage</span><span class="d" lang="en">Real-time data from an Industry 4.0 plant</span></a></li>
+    <li><a href="#hexnode"><span class="label">2021–2024 · Mitsogo</span><span class="t"><span lang="de">Hexnode-Ökosystem</span><span lang="en">Hexnode ecosystem</span></span><span class="d" lang="de">macOS-Geräteverwaltung und Fernsteuerung</span><span class="d" lang="en">macOS device management and remote control</span></a></li>
+    <li><a href="#low-code"><span class="label">2024–2025 · Ramco</span><span class="t">Low-Code Runtime</span><span class="d" lang="de">Aus JSON wird eine lauffähige Oberfläche</span><span class="d" lang="en">Turning JSON into a working interface</span></a></li>
+  </ol>
+</nav>
+
+<!-- ============ EXAMREVIEW ============ -->
+<section class="sheet" id="examreview">
+  <div class="wrap">
+    <div class="sheet-head">
+      <div class="meta">
+        <span class="no">01</span>
+        <span class="org">Digitalschmiede Bayern · byte</span>
+        <span class="when">08–10/2026 · Fellowship</span>
+      </div>
+      <div>
+        <h2>ExamReview</h2>
+        <p class="kicker" lang="de">Lehrkräfte schreiben die Entwürfe für die schriftlichen Abschlussprüfungen der Pflegeausbildung. ExamReview prüft jeden Entwurf gegen die Regeln aus Gesetzen und Handreichungen, zeigt jeden Befund mit Quelle und schlägt eine Korrektur vor. Die Entscheidung bleibt bei der Lehrkraft.</p>
+        <p class="kicker" lang="en">Teachers write the drafts for the written final exams in nursing education. ExamReview checks each draft against the rules from laws and official guidance, shows every finding with its source and suggests a fix. The teacher keeps the final say.</p>
+      </div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <div class="facts">
+          <div class="fact"><div class="v">85 %</div><div class="k" lang="de">Präzision der Befunde im Schnitt, getestet an 12 echten Prüfungsentwürfen aus Vorjahren</div><div class="k" lang="en">average precision of findings, tested on 12 real exam drafts from past years</div></div>
+          <div class="fact"><div class="v">82 %</div><div class="k" lang="de">Recall im selben Test: so viele echte Mängel findet das System</div><div class="k" lang="en">recall in the same test: the share of real issues the system catches</div></div>
+          <div class="fact"><div class="v">6</div><div class="k" lang="de">Schritte vom Upload bis zur Einreichung</div><div class="k" lang="en">steps from upload to submission</div></div>
+        </div>
+        <div class="chips"><span class="chip">Python</span><span class="chip">OpenAI API</span><span class="chip">Structured Outputs</span><span class="chip">LLM-as-judge</span><span class="chip">YAML-Regelwerk</span><span class="chip">Spec-driven</span><span class="chip">Claude Code</span></div>
+      </aside>
+
+      <div class="main">
+        <figure>
+          <div class="shot"><video controls preload="metadata" playsinline poster="media/er-checking.webp" width="1280" height="698"><source src="media/examreview.mp4" type="video/mp4"></video></div>
+          <figcaption lang="de">Rundgang durch ExamReview, 5 Minuten, mit Erklärung auf Deutsch.</figcaption>
+          <figcaption lang="en">A five-minute walkthrough of ExamReview, narrated in German.</figcaption>
+        </figure>
+
+        <div>
+          <h3><span lang="de">So läuft ein Entwurf durch die Prüfung</span><span lang="en">How a draft moves through the review</span></h3>
+          <div class="steps" role="tablist" aria-label="ExamReview">
+            <button type="button" role="tab" id="er-t1" aria-selected="true" data-step="0"><span class="n">1</span><span lang="de">Entwurf anlegen</span><span lang="en">Upload draft</span></button>
+            <button type="button" role="tab" id="er-t2" aria-selected="false" data-step="1"><span class="n">2</span><span lang="de">Dopplungen</span><span lang="en">Duplicates</span></button>
+            <button type="button" role="tab" id="er-t3" aria-selected="false" data-step="2"><span class="n">3</span><span lang="de">Kompetenzen</span><span lang="en">Competencies</span></button>
+            <button type="button" role="tab" id="er-t4" aria-selected="false" data-step="3"><span class="n">4</span><span lang="de">Überarbeiten</span><span lang="en">Revise</span></button>
+            <button type="button" role="tab" id="er-t5" aria-selected="false" data-step="4"><span class="n">5</span><span lang="de">Gesamtcheck</span><span lang="en">Overall check</span></button>
+            <button type="button" role="tab" id="er-t6" aria-selected="false" data-step="5"><span class="n">6</span><span lang="de">Einreichen</span><span lang="en">Submit</span></button>
+          </div>
+          <div class="stage" role="tabpanel" aria-live="polite">
+            <div class="shot"><img id="er-img" src="media/er-1-upload.webp" width="1600" height="867" alt="ExamReview: Prüfungsentwurf als Word-Dokument hochladen" loading="lazy"></div>
+            <div class="cap" id="er-cap"></div>
+          </div>
+        </div>
+
+        <div>
+          <h3><span lang="de">Wie die Prüfung funktioniert</span><span lang="en">How the check works</span></h3>
+          <div class="flow">
+            <div class="node"><b><span lang="de">Regelwerk</span><span lang="en">Rule catalogue</span></b><span lang="de">Gesetze und Handreichungen, mit KI-Hilfe in einen YAML-Regelkatalog übersetzt</span><span lang="en">Laws and official guidance, turned into a YAML rule catalogue with AI support</span></div>
+            <div class="node"><b><span lang="de">Klassifizierung</span><span lang="en">Classification</span></b><span lang="de">Jede Regel: deterministisch, LLM-prüfbar oder hybrid</span><span lang="en">Each rule: deterministic, LLM-checkable or hybrid</span></div>
+            <div class="node me"><span class="tag"><span lang="de">Prüflauf</span><span lang="en">Check run</span></span><b><span lang="de">Regelprüfung</span><span lang="en">Rule checks</span></b><span lang="de">Code für feste Regeln, LLM mit Structured Outputs für Ermessensfragen</span><span lang="en">Code for fixed rules, an LLM with structured outputs for judgement calls</span></div>
+            <div class="node"><b><span lang="de">Befund</span><span lang="en">Finding</span></b><span lang="de">Textstelle, Begründung, Quelle, Schweregrad, Vorschlag</span><span lang="en">Quoted passage, reasoning, source, severity, suggested fix</span></div>
+            <div class="node"><b><span lang="de">Lehrkraft</span><span lang="en">Teacher</span></b><span lang="de">Vorschlag übernehmen, selbst ändern oder widersprechen</span><span lang="en">Apply the suggestion, edit it or contest it</span></div>
+          </div>
+          <p class="note" style="margin-top:10px" lang="de">Die Qualität der LLM-Befunde wird mit einem zweiten Modell als Bewerter (LLM-as-judge) gemessen. Im Test an 12 echten Vorjahresentwürfen erreichte das System im Schnitt 85 % Präzision und 82 % Recall.</p>
+          <p class="note" style="margin-top:10px" lang="en">A second model acting as judge (LLM-as-judge) measures the quality of the LLM findings. Tested on 12 real exam drafts from past years, the system averaged 85% precision and 82% recall.</p>
+        </div>
+
+        <div class="mine">
+          <span class="label"><span lang="de">Mein Beitrag</span><span lang="en">My part</span></span>
+          <p lang="de">Im Fellowship-Team habe ich die KI-Prüflogik gebaut: den Regelkatalog aus den Rechtstexten, die Einteilung in deterministische, LLM- und hybride Regeln, die strukturierten LLM-Befunde und die LLM-as-judge-Evaluation. Gearbeitet habe ich spec-driven mit Claude Code. Als Nächstes erweitere ich das System zu einer Agenten-Architektur.</p>
+          <p lang="en">In the fellowship team I built the AI review logic: the rule catalogue derived from the legal texts, the split into deterministic, LLM and hybrid rules, the structured LLM findings and the LLM-as-judge evaluation. I worked spec-driven with Claude Code. Next, I'm extending the system into an agent-based architecture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SMART FACTORY ============ -->
+<section class="sheet" id="smart-factory">
+  <div class="wrap">
+    <div class="sheet-head">
+      <div class="meta">
+        <span class="no">02</span>
+        <span class="org">OTH Amberg-Weiden</span>
+        <span class="when"><span lang="de">seit 06/2025 · Studentische Hilfskraft</span><span lang="en">since 06/2025 · Student developer</span></span>
+      </div>
+      <div>
+        <h2>Smart Factory</h2>
+        <p class="kicker" lang="de">Eine Lernfabrik aus Materialflussmodulen mit Roboterarmen, SPS und Energiezählern. Jedes Modul liefert seine Daten über einen eigenen OPC-UA-Server. Der Leitstand zeigt die Anlage live, als digitalen Zwilling und mit historischen Messwerten, und steuert sie.</p>
+        <p class="kicker" lang="en">A learning factory built from material-flow modules with robot arms, PLCs and energy meters. Each module serves its data through its own OPC UA server. The control dashboard shows the plant live, as a digital twin and with historical readings, and controls it.</p>
+      </div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <div class="facts">
+          <div class="fact"><div class="v">−40 %</div><div class="k" lang="de">Datenlatenz durch asynchrones, ereignisgesteuertes Design</div><div class="k" lang="en">data latency through async, event-driven design</div></div>
+          <div class="fact"><div class="v">6</div><div class="k" lang="de">Module im Leitstand, je mit eigenem OPC-UA-Server</div><div class="k" lang="en">modules on the dashboard, each with its own OPC UA server</div></div>
+        </div>
+        <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">asyncio</span><span class="chip">WebSockets</span><span class="chip">OPC UA</span><span class="chip">Docker</span><span class="chip">GitLab CI/CD</span></div>
+      </aside>
+
+      <div class="main">
+        <figure>
+          <div class="shot"><img src="media/sf-dashboard.webp" width="1600" height="859" alt="Leitstand der Smart Factory mit digitalem Zwilling, Anlagenstatus und sechs Materialflussmodulen" data-alt-en="Smart Factory control dashboard with digital twin, plant status and six material-flow modules" loading="lazy"></div>
+          <figcaption><span lang="de">Anlagenübersicht: digitaler Zwilling, Betriebsstatus, Leistungsaufnahme und je eine Kachel pro Modul.</span><span lang="en">Plant overview: digital twin, operating state, power draw and one tile per module.</span>
+            <a class="video-link" href="https://cap.so/s/nc9gfbzr4acwbh3" target="_blank" rel="noopener"><span lang="de">Video ansehen (2 Min.)</span><span lang="en">Watch the video (2 min)</span> ↗</a></figcaption>
+        </figure>
+
+        <div>
+          <h3><span lang="de">Datenfluss</span><span lang="en">Data flow</span></h3>
+          <div class="flow">
+            <div class="node"><b><span lang="de">Module</span><span lang="en">Modules</span> MFM101–108</b><span lang="de">Roboterarm, SPS, OpenController, Energiezähler</span><span lang="en">Robot arm, PLC, OpenController, energy meter</span></div>
+            <div class="node"><b>OPC UA</b><span lang="de">Ein Server pro Modul: Zustände, Messwerte, Befehle</span><span lang="en">One server per module: states, readings, commands</span></div>
+            <div class="node me"><span class="tag"><span lang="de">Mein Teil</span><span lang="en">My part</span></span><b><span lang="de">Python-Dienste</span><span lang="en">Python services</span></b><span lang="de">FastAPI und asyncio, synchronisieren Live-Daten und leiten Befehle weiter</span><span lang="en">FastAPI and asyncio, sync live data and relay commands</span></div>
+            <div class="node"><b><span lang="de">Leitstand</span><span lang="en">Dashboard</span></b><span lang="de">Live über WebSockets, digitaler Zwilling, Verlaufsdaten</span><span lang="en">Live over WebSockets, digital twin, history</span></div>
+          </div>
+        </div>
+
+        <figure>
+          <div class="shot"><img src="media/sf-module.webp" width="1600" height="851" alt="Moduldetailansicht MFM103 mit Steuerbefehlen und Verlauf der Wirkleistung" data-alt-en="Module detail view MFM103 with controls and active-power history" loading="lazy"></div>
+          <figcaption lang="de">Modul MFM103: Status, Steuerung (SPS RUN/STOP, Andocken, Greifer) und Verlauf der Wirkleistung mit wählbarer Auflösung.</figcaption>
+          <figcaption lang="en">Module MFM103: status, controls (PLC RUN/STOP, docking, gripper) and active-power history with adjustable granularity.</figcaption>
+        </figure>
+
+        <div class="mine">
+          <span class="label"><span lang="de">Mein Beitrag</span><span lang="en">My part</span></span>
+          <p lang="de">Ich entwickle die ereignisgesteuerten Backend-Dienste, die die Module über OPC UA, REST und WebSockets an die Plattform anbinden. Durch asynchrones Design sank die Datenlatenz um 40 %. Die Dienste laufen in Docker und werden über GitLab CI/CD ausgeliefert. Leitstand-Oberfläche und digitaler Zwilling entstehen im Team; mein Teil ist die Datenschicht dahinter.</p>
+          <p lang="en">I build the event-driven backend services that connect the modules to the platform over OPC UA, REST and WebSockets. Async design cut data latency by 40%. The services run in Docker and ship through GitLab CI/CD. The dashboard UI and the digital twin are team work; my part is the data layer behind them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HEXNODE ============ -->
+<section class="sheet" id="hexnode">
+  <div class="wrap">
+    <div class="sheet-head">
+      <div class="meta">
+        <span class="no">03</span>
+        <span class="org">Mitsogo · Hexnode UEM</span>
+        <span class="when">08/2021–06/2024 · Software Engineer</span>
+      </div>
+      <div>
+        <h2><span lang="de">Das Hexnode-Ökosystem auf dem Mac</span><span lang="en">The Hexnode ecosystem on the Mac</span></h2>
+        <p class="kicker" lang="de">Hexnode UEM verwaltet Firmengeräte. Auf jedem verwalteten Mac arbeiten mehrere Programme zusammen, die ich in Teams von zwei bis drei Entwicklern mitgebaut habe. Wählen Sie einen Ablauf und sehen Sie, wie die Teile zusammenspielen.</p>
+        <p class="kicker" lang="en">Hexnode UEM manages company devices. On every managed Mac, several programs work together, which I co-developed in teams of two to three engineers. Pick a scenario and watch how the parts interact.</p>
+      </div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <div class="facts">
+          <div class="fact"><div class="v">100k+</div><div class="k" lang="de">verbundene Geräte auf der Plattform</div><div class="k" lang="en">connected devices on the platform</div></div>
+          <div class="fact"><div class="v">5</div><div class="k" lang="de">Komponenten mitentwickelt</div><div class="k" lang="en">components co-developed</div></div>
+        </div>
+        <div class="chips"><span class="chip">Swift · Xcode</span><span class="chip">MQTT</span><span class="chip">Electron</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Socket.IO</span><span class="chip">SSE</span><span class="chip">WebRTC</span><span class="chip">Entra ID</span></div>
+      </aside>
+
+      <div class="main">
+        <div class="eco" id="eco">
+          <div class="eco-tabs" role="tablist" aria-label="Abläufe">
+            <button type="button" role="tab" id="sc-0" data-sc="0" aria-selected="true"><span lang="de">Admin-Befehl</span><span lang="en">Admin command</span></button>
+            <button type="button" role="tab" id="sc-1" data-sc="1" aria-selected="false"><span lang="de">Endnutzer-App</span><span lang="en">End-user app</span></button>
+            <button type="button" role="tab" id="sc-2" data-sc="2" aria-selected="false"><span lang="de">Anmeldung mit Entra ID</span><span lang="en">Sign-in with Entra ID</span></button>
+            <button type="button" role="tab" id="sc-3" data-sc="3" aria-selected="false"><span lang="de">Fernsteuerung</span><span lang="en">Remote control</span></button>
+          </div>
+          <div class="eco-canvas">
+            <svg viewBox="0 0 960 560" role="img" aria-labelledby="eco-title">
+              <title id="eco-title">Hexnode macOS ecosystem</title>
+              <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/></marker></defs>
+              <rect class="box" x="290" y="180" width="640" height="360" rx="14"/>
+              <text class="tt" x="310" y="505" lang="de">Verwalteter Mac</text><text class="tt" x="310" y="505" lang="en">Managed Mac</text>
+              <text class="ts" x="310" y="524" lang="de">Electron-Apps auch unter Windows</text><text class="ts" x="310" y="524" lang="en">Electron apps also run on Windows</text>
+
+              <path class="e" id="e-admin-server" d="M250 72 H545" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-server-agent" d="M640 104 V215" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-server-uem" d="M560 104 V150 H400 V215" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-uem-agent" d="M490 247 H540" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-agent-remote" d="M590 279 V315 H400 V350" marker-end="url(#ah)"/>
+              <path class="e" id="e-agent-login" d="M690 279 V315 H800 V350" marker-end="url(#ah)"/>
+              <path class="e" id="e-login-entra" d="M860 350 V104" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-login-account" d="M835 414 V453" marker-end="url(#ah)"/>
+              <path class="e" id="e-admin-broker" d="M145 104 V338" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e" id="e-remote-broker" d="M310 382 H252" marker-end="url(#ah)" marker-start="url(#ah)"/>
+              <path class="e p2p" id="e-webrtc" d="M225 104 V300 H360 V350" marker-end="url(#ah)" marker-start="url(#ah)"/>
+
+              <text class="el" id="l-mqtt" x="648" y="165">MQTT</text>
+              <text class="el" id="l-rest" x="440" y="143">REST · SSE</text>
+              <text class="el" id="l-sock" x="492" y="238">socket</text>
+              <text class="el" id="l-oidc" x="868" y="235">OIDC</text>
+              <text class="el" id="l-sio" x="153" y="225">Socket.IO</text>
+              <text class="el" id="l-rtc" x="233" y="292">WebRTC P2P</text>
+
+              <g class="n ext" id="n-admin"><rect x="40" y="40" width="210" height="64" rx="8"/><text class="tt" x="56" y="66">Admin-Browser</text><text class="ts" x="56" y="86">Hexnode-Portal</text></g>
+              <g class="n ext" id="n-server"><rect x="545" y="40" width="190" height="64" rx="8"/><text class="tt" x="561" y="66">Hexnode-Server</text><text class="ts" x="561" y="86" lang="de">Richtlinien, Befehle</text><text class="ts" x="561" y="86" lang="en">Policies, commands</text></g>
+              <g class="n ext" id="n-entra"><rect x="755" y="40" width="165" height="64" rx="8"/><text class="tt" x="771" y="66">Microsoft Entra ID</text><text class="ts" x="771" y="86" lang="de">Identität (Azure)</text><text class="ts" x="771" y="86" lang="en">Identity (Azure)</text></g>
+              <g class="n mine" id="n-broker"><rect x="40" y="338" width="212" height="88" rx="8"/><text class="tm" x="56" y="358" lang="de">MITENTWICKELT</text><text class="tm" x="56" y="358" lang="en">CO-DEVELOPED</text><text class="tt" x="56" y="378">Remote-Broker</text><text class="ts" x="56" y="397">Node.js · Socket.IO</text><text class="ts" x="56" y="414">macOS, Windows, Linux, Android</text></g>
+              <g class="n mine" id="n-uem"><rect x="310" y="215" width="180" height="64" rx="8"/><text class="tt" x="326" y="241">UEM-App</text><text class="ts" x="326" y="261">Electron · LaunchAgent</text></g>
+              <g class="n mine" id="n-agent"><rect x="540" y="215" width="200" height="64" rx="8"/><text class="tt" x="556" y="241">macOS-Agent</text><text class="ts" x="556" y="261">Swift · LaunchDaemon</text></g>
+              <g class="n mine" id="n-remote"><rect x="310" y="350" width="180" height="64" rx="8"/><text class="tt" x="326" y="376">Remote-App</text><text class="ts" x="326" y="396">Electron · WebRTC</text></g>
+              <g class="n mine" id="n-login"><rect x="750" y="350" width="170" height="64" rx="8"/><text class="tt" x="766" y="376">Login-Plugin</text><text class="ts" x="766" y="396" lang="de">ersetzt macOS-Login</text><text class="ts" x="766" y="396" lang="en">replaces macOS login</text></g>
+              <g class="n ext" id="n-account"><rect x="750" y="455" width="170" height="56" rx="8"/><text class="tt" x="766" y="479" lang="de">macOS-Konto</text><text class="tt" x="766" y="479" lang="en">macOS account</text><text class="ts" x="766" y="497" lang="de">Passwort synchron</text><text class="ts" x="766" y="497" lang="en">password in sync</text></g>
+              <circle class="pulse" id="pulse" r="6" cx="-20" cy="-20"/>
+            </svg>
+          </div>
+          <div class="eco-foot">
+            <ol class="eco-steps" id="eco-steps" aria-live="polite"></ol>
+            <button type="button" class="replay" id="eco-replay"><span lang="de">↻ Nochmal abspielen</span><span lang="en">↻ Replay</span></button>
+          </div>
+        </div>
+
+        <div class="comp">
+          <div><b>macOS-Agent</b><small>Swift · Xcode · MQTT</small><span lang="de">Hintergrunddienst (LaunchDaemon): empfängt Befehle des Servers per MQTT, führt sie aus und meldet Geräteinformationen und Berichte zurück.</span><span lang="en">Background service (launch daemon): receives server commands over MQTT, executes them and reports device details back.</span></div>
+          <div><b>UEM-App</b><small>Electron · React · Windows &amp; macOS</small><span lang="de">Oberfläche für Endnutzer: zeigt den Verwaltungsstatus und Nachrichten des Servers, startet eine Synchronisierung. Arbeitet über einen lokalen Socket mit dem Agent zusammen.</span><span lang="en">End-user interface: shows the managed status and server messages and triggers a sync. Works with the agent over a local socket.</span></div>
+          <div><b>Login-Plugin</b><small>Swift · Xcode · Entra ID</small><span lang="de">Ersetzt das macOS-Anmeldefenster: erst Anmeldung bei Microsoft Entra ID, dann Entsperren des fest verknüpften Mac-Kontos mit synchronem Passwort. Konfiguration kommt vom Agent.</span><span lang="en">Replaces the macOS login window: sign in with Microsoft Entra ID first, then unlock the linked Mac account with the password kept in sync. Configuration comes from the agent.</span></div>
+          <div><b>Remote-App</b><small>Electron · WebRTC · Windows &amp; macOS</small><span lang="de">Vom Agent gestartet, baut eine direkte WebRTC-Verbindung zum Browser des Admins auf: Bildschirm ansehen und fernsteuern.</span><span lang="en">Launched by the agent, it opens a direct WebRTC connection to the admin's browser for remote view and control.</span></div>
+          <div><b>Remote-Broker</b><small>Node.js · Socket.IO · SSE</small><span lang="de">Sitzungsverwaltung für alle Plattformen: vermittelt den Verbindungsaufbau und trägt Echtzeitfunktionen wie die Dateiverwaltung auf Android-Geräten.</span><span lang="en">Session management for all platforms: brokers the connection setup and carries real-time features such as file management on Android devices.</span></div>
+        </div>
+        <p class="note" lang="de">Die Apps laufen auf den Geräten der Unternehmen, die Hexnode UEM einsetzen. Die Plattform verbindet über 100.000 Geräte.</p>
+        <p class="note" lang="en">The apps run on the devices of companies using Hexnode UEM. The platform connects 100,000+ devices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOW-CODE ============ -->
+<section class="sheet" id="low-code">
+  <div class="wrap">
+    <div class="sheet-head">
+      <div class="meta">
+        <span class="no">04</span>
+        <span class="org">Ramco Systems</span>
+        <span class="when">06/2024–01/2025 · Software Engineer II</span>
+      </div>
+      <div>
+        <h2><span lang="de">Die Laufzeit einer Low-Code-Plattform</span><span lang="en">The runtime of a low-code platform</span></h2>
+        <p class="kicker" lang="de">In Ramcos Low-Code-Plattform bauen Anwender Oberflächen per Drag &amp; Drop. Der Designer speichert jede Seite als JSON: Layout, Komponenten und was jeder Button tut. Ich habe an der Runtime gearbeitet, die aus diesem JSON im Browser eine lauffähige Anwendung macht.</p>
+        <p class="kicker" lang="en">In Ramco's low-code platform, users build interfaces by drag and drop. The designer stores each page as JSON: the layout, the components and what every button does. I worked on the runtime that turns this JSON into a working application in the browser.</p>
+      </div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <div class="facts">
+          <div class="fact"><div class="v">+22 %</div><div class="k" lang="de">schnellere Reaktionszeit der Plattform nach gezieltem Refactoring</div><div class="k" lang="en">faster platform response after targeted refactoring</div></div>
+          <div class="fact"><div class="v">−80 %</div><div class="k" lang="de">manueller Deployment-Aufwand dank CI/CD</div><div class="k" lang="en">manual deployment effort through CI/CD</div></div>
+        </div>
+        <div class="chips"><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">React</span><span class="chip">GitLab</span><span class="chip">Azure DevOps</span><span class="chip">Docker</span></div>
+      </aside>
+
+      <div class="main">
+        <div class="flow">
+          <div class="node"><b>Designer</b><span lang="de">Anwender ziehen Komponenten auf die Seite</span><span lang="en">Users drag components onto the page</span></div>
+          <div class="node"><b><span lang="de">JSON-Metadaten</span><span lang="en">JSON metadata</span></b><span lang="de">Layout, Felder, Datenbindung, Aktionen</span><span lang="en">Layout, fields, data binding, actions</span></div>
+          <div class="node me"><span class="tag"><span lang="de">Mein Bereich</span><span lang="en">My area</span></span><b>Runtime</b><span lang="de">TypeScript und React: liest das JSON, rendert die Seite, führt Aktionen aus</span><span lang="en">TypeScript and React: reads the JSON, renders the page, runs the actions</span></div>
+          <div class="node"><b><span lang="de">Anwendung</span><span lang="en">Application</span></b><span lang="de">Lauffähige Oberfläche im Browser, ohne eigenen Code</span><span lang="en">A working interface in the browser, no custom code</span></div>
+        </div>
+
+        <div>
+          <h3><span lang="de">Ausprobieren: JSON rein, Oberfläche raus</span><span lang="en">Try it: JSON in, interface out</span></h3>
+          <div class="lc">
+            <div class="lc-bar">
+              <div class="presets" role="group" aria-label="Beispiele">
+                <button type="button" id="lc-p0" data-preset="form" aria-pressed="true"><span lang="de">Formular</span><span lang="en">Form</span></button>
+                <button type="button" id="lc-p1" data-preset="table" aria-pressed="false"><span lang="de">Tabelle</span><span lang="en">Table</span></button>
+              </div>
+              <span class="note" lang="de">Vereinfachtes Nachbau-Beispiel, nicht Ramcos Schema</span><span class="note" lang="en">Simplified recreation, not Ramco's schema</span>
+            </div>
+            <div class="lc-grid">
+              <div class="lc-code">
+                <label class="label" for="lc-json"><span lang="de">Seitenbeschreibung (JSON, editierbar)</span><span lang="en">Page definition (JSON, editable)</span></label>
+                <textarea id="lc-json" spellcheck="false" autocomplete="off"></textarea>
+                <div class="err" id="lc-err" role="status"></div>
+              </div>
+              <div class="lc-out">
+                <div class="label"><span lang="de">Gerenderte Seite</span><span lang="en">Rendered page</span></div>
+                <div class="preview" id="lc-out"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mine">
+          <span class="label"><span lang="de">Mein Beitrag</span><span lang="en">My part</span></span>
+          <p lang="de">Ich habe an der Rendering-Runtime mitgearbeitet, also dem Teil, der die Metadaten interpretiert, Komponenten aufbaut und Button-Aktionen ausführt. Daneben habe ich Engpässe in Diensten und UI-Komponenten der Plattform behoben und die CI/CD-Pipelines für Paketauslieferung und Releases automatisiert.</p>
+          <p lang="en">I worked on the rendering runtime, the part that interprets the metadata, builds the components and runs the button actions. Alongside that I fixed bottlenecks in the platform's services and UI components and automated the CI/CD pipelines for package delivery and releases.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="sheet" id="erfahrung">
+  <div class="wrap cv">
+    <div class="meta"><span class="no">05</span><h2 style="font-size:var(--step-2)"><span lang="de">Werdegang</span><span lang="en">Experience</span></h2></div>
+    <div style="display:grid; gap:40px; min-width:0">
+      <ol class="tl">
+        <li><span class="when">08–10/2026</span><div><b>Software Engineer Fellow · Digitalschmiede Bayern, byte</b><span lang="de">München · KI-Prüfwerkzeug ExamReview, spec-driven development</span><span lang="en">Munich · AI review tool ExamReview, spec-driven development</span></div></li>
+        <li><span class="when"><span lang="de">seit</span><span lang="en">since</span> 06/2025</span><div><b><span lang="de">Studentische Hilfskraft – Softwareentwickler</span><span lang="en">Student developer</span> · OTH Amberg-Weiden</b><span lang="de">Amberg · Echtzeit-Backends für die Smart Factory</span><span lang="en">Amberg · Real-time backends for the Smart Factory</span></div></li>
+        <li><span class="when">06/2024–01/2025</span><div><b>Software Engineer II · Ramco Systems</b><span lang="de">Chennai · Low-Code-Runtime, Performance, CI/CD</span><span lang="en">Chennai · Low-code runtime, performance, CI/CD</span></div></li>
+        <li><span class="when">08/2021–06/2024</span><div><b>Software Engineer · Mitsogo (Hexnode)</b><span lang="de">Chennai · macOS-Geräteverwaltung, Fernsteuerung, verteilte Backends</span><span lang="en">Chennai · macOS device management, remote control, distributed backends</span></div></li>
+      </ol>
+      <div>
+        <h3><span lang="de">Ausbildung</span><span lang="en">Education</span></h3>
+        <ol class="tl">
+          <li><span class="when"><span lang="de">seit</span><span lang="en">since</span> 03/2025</span><div><b>M.Sc. Artificial Intelligence for Industrial Applications</b><span>OTH Amberg-Weiden</span></div></li>
+          <li><span class="when">2017–2021</span><div><b>B.Tech <span lang="de">Maschinenbau</span><span lang="en">Mechanical Engineering</span></b><span>APJ Abdul Kalam Technological University, Kerala</span></div></li>
+        </ol>
+      </div>
+      <div class="skills">
+        <div><h3><span lang="de">KI &amp; LLMs</span><span lang="en">AI &amp; LLMs</span></h3><div class="chips"><span class="chip">LangChain</span><span class="chip">OpenAI API</span><span class="chip">RAG</span><span class="chip">Structured Outputs</span><span class="chip">LLM-as-judge</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">OpenCV</span></div></div>
+        <div><h3>Backend &amp; <span lang="de">Echtzeit</span><span lang="en">real-time</span></h3><div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">asyncio</span><span class="chip">Node.js</span><span class="chip">TypeScript</span><span class="chip">WebSockets</span><span class="chip">MQTT</span><span class="chip">OPC UA</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span></div></div>
+        <div><h3><span lang="de">Betrieb &amp; Arbeitsweise</span><span lang="en">Delivery &amp; workflow</span></h3><div class="chips"><span class="chip">Docker</span><span class="chip">GitLab CI/CD</span><span class="chip">pytest</span><span class="chip">SonarQube</span><span class="chip">Spec-driven development</span><span class="chip">Claude Code</span><span class="chip">GitHub Copilot</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet contact" id="kontakt">
+  <div class="wrap">
+    <h2><span lang="de">Lassen Sie uns sprechen.</span><span lang="en">Let's talk.</span></h2>
+    <p class="prose" lang="de">Ich bin ab sofort für eine Werkstudentenstelle mit 16–20 Stunden pro Woche verfügbar, in Nürnberg, München oder remote.</p>
+    <p class="prose" lang="en">I'm available now for a working-student role at 16–20 hours per week, in Nuremberg, Munich or remote.</p>
+    <div class="contact-row">
+      <span class="mail" id="mail">marshalalakkadan@gmail.com</span>
+      <button type="button" class="copy" id="copy-mail"><span lang="de">Kopieren</span><span lang="en">Copy</span></button>
+      <a href="https://www.linkedin.com/in/marshal-sebastine/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/marshalSebastine" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Marshal Sebastine · <a href="impressum.html">Impressum</a> · <a href="impressum.html#datenschutz"><span lang="de">Datenschutz</span><span lang="en">Privacy</span></a></span><span lang="de">Screenshots mit Demodaten. Interne Adressen unkenntlich gemacht.</span><span lang="en">Screenshots use demo data. Internal addresses are blurred.</span></div></footer>
+</div>
+
+<script>
+(function () {
+  const site = document.getElementById('site');
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const listeners = [];
+  function setLang(l, persist) {
+    site.dataset.lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === l)));
+    document.querySelectorAll('img[data-alt-en]').forEach(img => {
+      if (!img.dataset.altDe) img.dataset.altDe = img.alt;
+      img.alt = l === 'en' ? img.dataset.altEn : img.dataset.altDe;
+    });
+    if (persist) store.set('lang', l);
+    listeners.forEach(fn => fn(l));
+  }
+  document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang, true)));
+  const lang = () => site.dataset.lang;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ExamReview stepper */
+  const ER = [
+    { img: 'er-1-upload.webp', w: 1600, h: 867, term: 'Entwurf anlegen',
+      de: ['Entwurf hochladen', 'Die Lehrkraft lädt den Prüfungsentwurf als Word-Datei hoch. ExamReview liest Aufgaben, Teilaufgaben, Operatoren, Punkte und Erwartungshorizont automatisch aus.'],
+      en: ['Upload the draft', 'The teacher uploads the exam draft as a Word file. ExamReview reads out tasks, subtasks, operators, points and the expected answers automatically.'] },
+    { img: 'er-2-case.webp', w: 1280, h: 698, term: 'Dopplungen Fallsituation',
+      de: ['Dopplungen erkennen', 'Aus der Fallsituation werden Bausteine erkannt: Setting, Person, Umfeld, Diagnosen. Diese werden mit den parallelen Entwürfen anderer Gruppen und den Prüfungen der Vorjahre verglichen.'],
+      en: ['Catch duplicates', 'The case description is broken into building blocks: setting, patient, environment, diagnoses. These are compared with other groups’ parallel drafts and with past exams.'] },
+    { img: 'er-3-competencies.webp', w: 1600, h: 867, term: 'Kompetenzen Tag 2',
+      de: ['Kompetenzen abdecken', 'Jede Teilaufgabe wird den geforderten Kompetenzen zugeordnet. Eine Matrix zeigt, ob der Prüfungstag alle Pflichtbereiche mit der richtigen Punkteverteilung abdeckt.'],
+      en: ['Cover the competencies', 'Each subtask is mapped to the required competencies. A matrix shows whether the exam day covers every mandatory area with the right point distribution.'] },
+    { img: 'er-4-revise.webp', w: 1280, h: 698, term: 'Aufgaben überarbeiten',
+      de: ['Aufgaben überarbeiten', 'Zu jedem Befund gibt es Textstelle, Begründung, Quelle und einen KI-Formulierungsvorschlag. Die Lehrkraft übernimmt ihn, schreibt selbst oder widerspricht mit Begründung.'],
+      en: ['Revise the tasks', 'Every finding shows the passage, reasoning, source and an AI-suggested rewording. The teacher applies it, writes their own fix or contests it with a reason.'] },
+    { img: 'er-5-overall.webp', w: 1600, h: 867, term: 'Gesamtcheck', sev: true,
+      de: ['Gesamtcheck', 'Alle Prüfkategorien auf einen Blick, von Operatoren und Anforderungsbereichen bis zu verständlicher Sprache auf B2-Niveau. Einreichen ist erst möglich, wenn keine harte Regel und keine Warnung mehr offen ist.'],
+      en: ['Overall check', 'All check categories at a glance, from operators and difficulty levels to plain language at B2 level. Submission unlocks only once no hard rule or warning is left open.'] },
+    { img: 'er-6-submit.webp', w: 1280, h: 698, term: 'Entwurf einreichen',
+      de: ['Einreichen mit Protokoll', 'Ein Änderungsprotokoll zeigt jede Korrektur als Vorher/Nachher, dazu behobene, offene und begründet widersprochene Befunde.'],
+      en: ['Submit with a log', 'A change log shows every fix as before/after, plus which findings were fixed, left open or contested with a reason.'] }
+  ];
+  const sevHTML = '<div class="sev"><span class="h">' + '<span lang="de">Harte Regel</span><span lang="en">Hard rule</span></span><span class="w"><span lang="de">Warnung</span><span lang="en">Warning</span></span><span class="i"><span lang="de">Hinweis</span><span lang="en">Hint</span></span></div>';
+  let erIdx = 0;
+  const erImg = document.getElementById('er-img'), erCap = document.getElementById('er-cap');
+  function showER(i, anim) {
+    erIdx = i; const s = ER[i];
+    document.querySelectorAll('.steps button').forEach((b, j) => { b.setAttribute('aria-selected', String(j === i)); b.tabIndex = j === i ? 0 : -1; });
+    erImg.src = 'media/' + s.img; erImg.width = s.w; erImg.height = s.h;
+    erImg.alt = 'ExamReview – ' + (lang() === 'en' ? s.en[0] : s.de[0]);
+    erCap.innerHTML = '<span class="de-term">' + s.term + '</span>' +
+      '<h4><span lang="de">' + s.de[0] + '</span><span lang="en">' + s.en[0] + '</span></h4>' +
+      '<p lang="de">' + s.de[1] + '</p><p lang="en">' + s.en[1] + '</p>' + (s.sev ? sevHTML : '');
+    if (anim && !reduce) {
+      erImg.animate([{ opacity: 0, transform: 'translateY(10px) scale(.985)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      [...erCap.children].forEach((c, k) => c.animate([{ opacity: 0, transform: 'translateX(14px)' }, { opacity: 1, transform: 'none' }], { duration: 480, delay: 60 + k * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+    }
+  }
+  const erTabs = [...document.querySelectorAll('.steps button')];
+  erTabs.forEach((b, i) => {
+    b.addEventListener('click', () => { stopAuto(); showER(i, true); });
+    b.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + ER.length) % ER.length; stopAuto(); showER(n, true); erTabs[n].focus(); }
+    });
+  });
+  ER.slice(1).forEach(s => { const im = new Image(); im.src = 'media/' + s.img; });
+  showER(0);
+  listeners.push(() => showER(erIdx));
+
+  /* Hexnode ecosystem */
+  const SC = [
+    { nodes: ['admin','server','agent'], steps: [
+      ['e-admin-server', 1, 'Der Admin löst im Hexnode-Portal einen Befehl aus, z. B. Gerät sperren oder App installieren.', 'The admin triggers a command in the Hexnode portal, such as locking the device or installing an app.'],
+      ['e-server-agent', 1, 'Der Server schickt den Befehl per MQTT an den macOS-Agent.', 'The server pushes the command to the macOS agent over MQTT.'],
+      [null, 0, 'Der Agent läuft als LaunchDaemon mit Systemrechten und führt den Befehl aus.', 'The agent runs as a launch daemon with system privileges and executes the command.'],
+      ['e-server-agent', -1, 'Der Agent meldet Ergebnis, Gerätedaten und Berichte an den Server zurück.', 'The agent reports the result, device details and reports back to the server.'] ] },
+    { nodes: ['server','uem','agent'], steps: [
+      ['e-server-uem', 1, 'Der Server schickt dem Nutzer eine Nachricht; die UEM-App zeigt sie an.', 'The server sends the user a message; the UEM app displays it.'],
+      [null, 0, 'Die UEM-App läuft als LaunchAgent in der Sitzung des Nutzers und zeigt den Verwaltungsstatus des Geräts.', 'The UEM app runs as a launch agent in the user’s session and shows the device’s managed status.'],
+      ['e-uem-agent', 1, 'Der Nutzer tippt auf „Synchronisieren“; die App gibt das über einen lokalen Socket an den Agent weiter.', 'The user taps Sync; the app passes it to the agent over a local socket.'],
+      ['e-server-agent', -1, 'Der Agent synchronisiert per MQTT mit dem Server. Agent und App teilen sich die Arbeit: Systemrechte hier, Oberfläche dort.', 'The agent syncs with the server over MQTT. Agent and app split the work: system privileges on one side, the interface on the other.'] ] },
+    { nodes: ['server','agent','login','entra','account'], steps: [
+      ['e-server-agent', 1, 'Der Admin aktiviert die Entra-ID-Anmeldung; die Richtlinie kommt per MQTT beim Agent an.', 'The admin enables Entra ID sign-in; the policy reaches the agent over MQTT.'],
+      ['e-agent-login', 1, 'Der Agent konfiguriert das Login-Plugin, das das Standard-Anmeldefenster von macOS ersetzt.', 'The agent configures the login plugin, which replaces the standard macOS login window.'],
+      ['e-login-entra', 1, 'Der Nutzer meldet sich zuerst bei Microsoft Entra ID an.', 'The user first signs in with Microsoft Entra ID.'],
+      ['e-login-entra', -1, 'Entra ID bestätigt die Identität.', 'Entra ID confirms the identity.'],
+      ['e-login-account', 1, 'Das Plugin entsperrt das fest verknüpfte Mac-Konto und hält beide Passwörter synchron.', 'The plugin unlocks the linked Mac account and keeps both passwords in sync.'] ] },
+    { nodes: ['admin','server','agent','remote','broker'], steps: [
+      ['e-admin-server', 1, 'Der Admin startet im Portal eine Fernsitzung.', 'The admin starts a remote session in the portal.'],
+      ['e-server-agent', 1, 'Der Server schickt den Befehl per MQTT an den Agent.', 'The server sends the command to the agent over MQTT.'],
+      ['e-agent-remote', 1, 'Der Agent startet die Remote-App.', 'The agent launches the remote app.'],
+      ['e-remote-broker', 1, 'Die Remote-App meldet sich beim Node.js-Broker an (Socket.IO).', 'The remote app registers with the Node.js broker (Socket.IO).'],
+      ['e-admin-broker', -1, 'Der Broker vermittelt den Verbindungsaufbau mit dem Browser des Admins.', 'The broker sets up the connection with the admin’s browser.'],
+      ['e-webrtc', 0, 'Danach laufen Bild und Steuerung direkt per WebRTC, Peer-to-Peer, ohne Umweg über den Server.', 'From then on, screen and control run directly over WebRTC, peer-to-peer, without passing through the server.'] ] }
+  ];
+  const edgeLabel = { 'e-server-agent': 'l-mqtt', 'e-server-uem': 'l-rest', 'e-uem-agent': 'l-sock', 'e-login-entra': 'l-oidc', 'e-admin-broker': 'l-sio', 'e-remote-broker': 'l-sio', 'e-webrtc': 'l-rtc' };
+  const pulse = document.getElementById('pulse');
+  const stepsEl = document.getElementById('eco-steps');
+  let sc = 0, run = 0, io = null;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  function clearEco() {
+    document.querySelectorAll('#eco .e, #eco .el, #eco .n').forEach(el => el.classList.remove('on'));
+    pulse.setAttribute('cx', -20); pulse.setAttribute('cy', -20); hideTrail();
+  }
+  function renderSteps(active) {
+    const s = SC[sc].steps;
+    stepsEl.innerHTML = s.map((st, i) => '<li class="' + (i === active ? 'on' : i < active ? 'done' : '') + '"><span lang="de">' + st[2] + '</span><span lang="en">' + st[3] + '</span></li>').join('');
+  }
+  function travel(path, dir, ms, token) {
+    return new Promise(res => {
+      const len = path.getTotalLength(); const t0 = performance.now();
+      function f(now) {
+        if (token !== run) return res();
+        let p = Math.min(1, (now - t0) / ms); const d = dir < 0 ? (1 - p) * len : p * len;
+        const pt = path.getPointAtLength(d); pulse.setAttribute('cx', pt.x); pulse.setAttribute('cy', pt.y);
+        trail.forEach((c, j) => { const dd = Math.max(0, Math.min(len, dir < 0 ? d + (j + 1) * 8 : d - (j + 1) * 8)); const q = path.getPointAtLength(dd); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); });
+        if (p < 1) requestAnimationFrame(f); else { ring(pt.x, pt.y); hideTrail(); res(); }
+      }
+      requestAnimationFrame(f);
+    });
+  }
+  async function play(i) {
+    sc = i; const token = ++run; clearEco();
+    document.querySelectorAll('.eco-tabs button').forEach((b, j) => b.setAttribute('aria-selected', String(j === i)));
+    SC[i].nodes.forEach(n => document.getElementById('n-' + n).classList.add('on'));
+    const steps = SC[i].steps;
+    for (let k = 0; k < steps.length; k++) {
+      if (token !== run) return;
+      renderSteps(k);
+      const [eid, dir] = steps[k];
+      if (eid) {
+        const path = document.getElementById(eid); path.classList.add('on');
+        if (edgeLabel[eid]) document.getElementById(edgeLabel[eid]).classList.add('on');
+        if (!reduce && dir !== 0) await travel(path, dir, 1100, token);
+        else await wait(reduce ? 700 : 1200);
+      } else { const nn = ['agent', 'uem'][i]; if (nn) flashNode(nn); await wait(reduce ? 700 : 1300); }
+      if (!reduce) await wait(650);
+    }
+    if (token === run) { renderSteps(steps.length); pulse.setAttribute('cx', -20); }
+  }
+  document.querySelectorAll('.eco-tabs button').forEach(b => b.addEventListener('click', () => { if (io) io.disconnect(); play(+b.dataset.sc); }));
+  document.getElementById('eco-replay').addEventListener('click', () => { if (io) io.disconnect(); play(sc); });
+  /* resting state: scenario 1 fully drawn; animation starts when the diagram scrolls into view */
+  (function rest() {
+    SC[0].nodes.forEach(n => document.getElementById('n-' + n).classList.add('on'));
+    ['e-admin-server', 'e-server-agent'].forEach(e => document.getElementById(e).classList.add('on'));
+    document.getElementById('l-mqtt').classList.add('on');
+    renderSteps(SC[0].steps.length);
+  })();
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); drawIn().then(() => { if (run === 0) play(0); }); } }, { threshold: 0.5 });
+    io.observe(document.querySelector('.eco-canvas'));
+  }
+
+  /* Low-code runtime demo */
+  const PRESETS = {
+    form: {
+      de: { page: 'Lieferantenanfrage', components: [
+        { type: 'heading', text: 'Neue Lieferantenanfrage' },
+        { type: 'text', text: 'Pflichtfelder sind markiert.' },
+        { type: 'input', id: 'supplier', label: 'Lieferant *', placeholder: 'z. B. Müller GmbH' },
+        { type: 'row', components: [
+          { type: 'select', id: 'category', label: 'Kategorie', options: ['Elektronik', 'Mechanik', 'Software'] },
+          { type: 'input', id: 'qty', label: 'Menge *', inputType: 'number' } ] },
+        { type: 'actions', components: [
+          { type: 'button', text: 'Anfrage senden', variant: 'primary', action: { type: 'validate', required: ['supplier', 'qty'], message: 'Bitte ausfüllen', onSuccess: { type: 'notify', text: 'Anfrage an {supplier} über {qty} Stück ({category}) gespeichert.' } } },
+          { type: 'button', text: 'Zurücksetzen', action: { type: 'reset' } } ] } ] },
+      en: { page: 'Supplier request', components: [
+        { type: 'heading', text: 'New supplier request' },
+        { type: 'text', text: 'Required fields are marked.' },
+        { type: 'input', id: 'supplier', label: 'Supplier *', placeholder: 'e.g. Miller Ltd' },
+        { type: 'row', components: [
+          { type: 'select', id: 'category', label: 'Category', options: ['Electronics', 'Mechanical', 'Software'] },
+          { type: 'input', id: 'qty', label: 'Quantity *', inputType: 'number' } ] },
+        { type: 'actions', components: [
+          { type: 'button', text: 'Send request', variant: 'primary', action: { type: 'validate', required: ['supplier', 'qty'], message: 'Please fill in', onSuccess: { type: 'notify', text: 'Request to {supplier} for {qty} units ({category}) saved.' } } },
+          { type: 'button', text: 'Reset', action: { type: 'reset' } } ] } ] }
+    },
+    table: {
+      de: { page: 'Bestellungen', components: [
+        { type: 'heading', text: 'Offene Bestellungen' },
+        { type: 'table', columns: ['Nr.', 'Lieferant', 'Betrag', 'Status'], rows: [['4711', 'Müller GmbH', '1.240 €', 'Offen'], ['4712', 'Kraus AG', '860 €', 'Geliefert'], ['4713', 'Lang KG', '3.105 €', 'Offen']] },
+        { type: 'actions', components: [ { type: 'button', text: 'Als erledigt markieren', variant: 'primary', action: { type: 'notify', text: '3 Bestellungen geprüft.' } } ] } ] },
+      en: { page: 'Orders', components: [
+        { type: 'heading', text: 'Open orders' },
+        { type: 'table', columns: ['No.', 'Supplier', 'Amount', 'Status'], rows: [['4711', 'Miller Ltd', '€1,240', 'Open'], ['4712', 'Kraus AG', '€860', 'Delivered'], ['4713', 'Lang KG', '€3,105', 'Open']] },
+        { type: 'actions', components: [ { type: 'button', text: 'Mark as done', variant: 'primary', action: { type: 'notify', text: '3 orders checked.' } } ] } ] }
+    }
+  };
+  const ta = document.getElementById('lc-json'), out = document.getElementById('lc-out'), err = document.getElementById('lc-err');
+  let preset = 'form', pristine = true, state = {};
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function renderNode(n, ctx) {
+    if (!n || typeof n !== 'object') return el('div', 'rt-unknown', 'invalid component');
+    switch (n.type) {
+      case 'heading': return el('h4', 'rt-h', esc(n.text));
+      case 'text': return el('p', 'rt-p', esc(n.text));
+      case 'input': case 'select': {
+        const w = el('div', 'rt-field'); const fid = 'rt-' + esc(n.id);
+        w.appendChild(el('label', null, esc(n.label))).setAttribute('for', fid);
+        let f;
+        if (n.type === 'select') { f = document.createElement('select'); (n.options || []).forEach(o => f.appendChild(el('option', null, esc(o)))); }
+        else { f = document.createElement('input'); f.type = n.inputType || 'text'; if (n.placeholder) f.placeholder = n.placeholder; }
+        f.id = fid; f.dataset.field = n.id;
+        if (state[n.id] != null) f.value = state[n.id];
+        state[n.id] = f.value;
+        f.addEventListener('input', () => { state[n.id] = f.value; w.classList.remove('bad'); const m = w.querySelector('.msg'); if (m) m.remove(); });
+        w.appendChild(f); ctx.fields[n.id] = w; return w;
+      }
+      case 'row': case 'actions': { const r = el('div', n.type === 'row' ? 'rt-row' : 'rt-actions'); (n.components || []).forEach(c => r.appendChild(renderNode(c, ctx))); return r; }
+      case 'table': {
+        const w = el('div', 'rt-table'); const t = document.createElement('table');
+        t.innerHTML = '<thead><tr>' + (n.columns || []).map(c => '<th>' + esc(c) + '</th>').join('') + '</tr></thead><tbody>' + (n.rows || []).map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('') + '</tbody>';
+        w.appendChild(t); return w;
+      }
+      case 'button': { const b = el('button', 'rt-btn' + (n.variant === 'primary' ? ' primary' : ''), esc(n.text)); b.type = 'button'; b.addEventListener('click', () => runAction(n.action, ctx)); return b; }
+      default: return el('div', 'rt-unknown', (lang() === 'en' ? 'Unknown component: ' : 'Unbekannte Komponente: ') + esc(n.type));
+    }
+  }
+  function runAction(a, ctx) {
+    if (!a) return;
+    const toast = ctx.toast; toast.hidden = true;
+    if (a.type === 'validate') {
+      let ok = true;
+      (a.required || []).forEach(id => { const w = ctx.fields[id]; if (!w) return; const v = (state[id] || '').trim(); const old = w.querySelector('.msg'); if (old) old.remove();
+        if (!v) { ok = false; w.classList.add('bad'); w.appendChild(el('span', 'msg', esc(a.message || 'Required'))); } });
+      if (ok) runAction(a.onSuccess, ctx);
+    } else if (a.type === 'notify') {
+      toast.textContent = String(a.text || '').replace(/\{(\w+)\}/g, (_, k) => state[k] != null ? state[k] : '');
+      toast.hidden = false; if (!reduce) toast.animate([{ opacity: 0, transform: 'translateY(6px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 340, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    } else if (a.type === 'reset') { state = {}; render(); }
+  }
+  function render(anim) {
+    let spec;
+    try { spec = JSON.parse(ta.value); err.textContent = ''; }
+    catch (e) { err.textContent = (lang() === 'en' ? 'Invalid JSON: ' : 'Ungültiges JSON: ') + e.message; return; }
+    out.innerHTML = ''; const ctx = { fields: {}, toast: el('div', 'rt-toast') }; ctx.toast.hidden = true; ctx.toast.setAttribute('role', 'status');
+    (spec.components || []).forEach(c => out.appendChild(renderNode(c, ctx)));
+    out.appendChild(ctx.toast);
+    if (anim && !reduce) [...out.children].forEach((c, k) => c.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 460, delay: k * 80, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+  }
+  function loadPreset(p) {
+    preset = p; pristine = true; state = {};
+    ta.value = JSON.stringify(PRESETS[p][lang()], null, 2);
+    document.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === p)));
+    render(true);
+  }
+  let tmr; ta.addEventListener('input', () => { pristine = false; clearTimeout(tmr); tmr = setTimeout(render, 250); });
+  document.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => loadPreset(b.dataset.preset)));
+  listeners.push(() => { if (pristine) loadPreset(preset); });
+  loadPreset('form');
+
+  /* copy email */
+  document.getElementById('copy-mail').addEventListener('click', function () {
+    const btn = this, txt = document.getElementById('mail').textContent;
+    const done = () => { const o = btn.innerHTML; btn.textContent = lang() === 'en' ? 'Copied' : 'Kopiert'; setTimeout(() => { btn.innerHTML = o; }, 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('mail')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
+  });
+
+  /* ---------- motion ---------- */
+  const svgNS = 'http://www.w3.org/2000/svg', ecoSvg = document.querySelector('.eco svg');
+  const trail = [0, 1, 2, 3].map(j => { const c = document.createElementNS(svgNS, 'circle'); c.setAttribute('r', 5 - j); c.setAttribute('class', 'trail'); c.style.opacity = String(0.55 - j * 0.12); c.setAttribute('cx', -20); c.setAttribute('cy', -20); ecoSvg.insertBefore(c, pulse); return c; });
+  function hideTrail() { trail.forEach(c => { c.setAttribute('cx', -20); c.setAttribute('cy', -20); }); }
+  function ring(x, y) { if (reduce) return; const c = document.createElementNS(svgNS, 'circle'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 7); c.setAttribute('class', 'ring'); ecoSvg.appendChild(c); const a = c.animate([{ transform: 'scale(1)', opacity: 0.9 }, { transform: 'scale(3.4)', opacity: 0 }], { duration: 720, easing: 'cubic-bezier(.2,.8,.2,1)' }); a.onfinish = () => c.remove(); }
+  function flashNode(id) { const r = document.querySelector('#n-' + id + ' rect'); if (!r) return; const b = r.getBBox(); ring(b.x + b.width / 2, b.y + b.height / 2); if (!reduce) r.animate([{ strokeWidth: 2 }, { strokeWidth: 5 }, { strokeWidth: 2 }], { duration: 900, easing: 'ease-in-out' }); }
+
+  /* ExamReview auto-advance */
+  const stepsBox = document.querySelector('.steps'); let autoT = null, autoOn = !reduce;
+  function pauseAuto() { clearInterval(autoT); autoT = null; stepsBox.classList.remove('auto'); }
+  function stopAuto() { autoOn = false; pauseAuto(); }
+  function startAuto() { if (!autoOn || autoT) return; stepsBox.classList.add('auto'); autoT = setInterval(() => showER((erIdx + 1) % ER.length, true), 5500); }
+  if (autoOn && 'IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? startAuto() : pauseAuto()), { threshold: 0.45 }).observe(document.querySelector('.stage'));
+
+  /* hero name: one span per letter */
+  const nameEl = document.getElementById('hero-name');
+  if (nameEl && !reduce) { const t = nameEl.textContent; nameEl.textContent = ''; let k = 0; for (const ch of t) { if (ch === ' ') { nameEl.appendChild(document.createTextNode(' ')); continue; } const sp = document.createElement('span'); sp.className = 'ch'; sp.setAttribute('aria-hidden', 'true'); sp.style.setProperty('--i', k++); sp.textContent = ch; nameEl.appendChild(sp); } }
+
+  /* marquee: duplicate track for a seamless loop */
+  const mq = document.getElementById('mq'); mq.innerHTML += mq.innerHTML;
+
+  /* header: progress bar, compact state, scroll-spy */
+  const prog = document.getElementById('progress'), topEl = document.querySelector('.top'); let ticking = false;
+  function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(() => { const h = document.documentElement.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')'; topEl.classList.toggle('scrolled', scrollY > 40); ticking = false; }); }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const navMap = { projekte: 'projekte', examreview: 'projekte', 'smart-factory': 'projekte', hexnode: 'projekte', 'low-code': 'projekte', erfahrung: 'erfahrung', kontakt: 'kontakt' };
+  const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const key = navMap[e.target.id]; navLinks.forEach(a => a.classList.toggle('cur', a.getAttribute('href') === '#' + key)); } }), { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(navMap).forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  }
+
+  /* scroll reveal, count-up numbers, section-number scramble */
+  function countUp(v) {
+    const txt = v.textContent.trim(); const m = txt.match(/^([−+-]?)(\d+)(.*)$/); if (!m) return;
+    const target = +m[2], t0 = performance.now(), dur = 1500;
+    (function f(now) { const p = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(2, -10 * p); v.textContent = m[1] + (p < 1 ? Math.round(target * e) : m[2]) + m[3]; if (p < 1) requestAnimationFrame(f); })(t0);
+  }
+  function scramble(el) { const fin = el.textContent; let n = 0; const id = setInterval(() => { n++; el.textContent = n < 10 ? fin.replace(/\d/g, () => Math.floor(Math.random() * 10)) : fin; if (n >= 10) clearInterval(id); }, 45); }
+  function onReveal(el) {
+    el.querySelectorAll('.fact .v').forEach(countUp); if (el.matches('.meta')) el.querySelectorAll('.no').forEach(scramble);
+    el.querySelectorAll('.flow .node').forEach((n, k) => n.animate([{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'none' }], { duration: 520, delay: 180 + k * 110, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+    el.querySelectorAll('.chip').forEach((n, k) => n.animate([{ opacity: 0, transform: 'scale(.8)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 150 + k * 40, easing: 'cubic-bezier(.3,1.4,.5,1)', fill: 'backwards' }));
+  }
+  if (!reduce && 'IntersectionObserver' in window) {
+    const vh = innerHeight, groups = new Map();
+    const items = [...document.querySelectorAll('.sheet-head > *, .side > *, .main > *, .cv > *, .tl li, .skills > div, .comp > div, .contact .wrap > *')].filter(el => el.getBoundingClientRect().top > vh * 0.9);
+    items.forEach(el => { const par = el.parentElement; const n = groups.get(par) || 0; groups.set(par, n + 1); el.style.setProperty('--rd', Math.min(n, 6) * 80 + 'ms'); el.classList.add('rv'); });
+    const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); onReveal(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(el => rio.observe(el));
+  }
+
+  /* screenshot tilt + shine */
+  if (!reduce && matchMedia('(pointer: fine)').matches) document.querySelectorAll('.shot').forEach(sh => {
+    if (sh.querySelector('video')) return; sh.classList.add('tilt');
+    sh.addEventListener('pointermove', e => { const r = sh.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; sh.style.setProperty('--ry', (x * 5).toFixed(2) + 'deg'); sh.style.setProperty('--rx', (-y * 5).toFixed(2) + 'deg'); sh.style.setProperty('--mx', ((x + 0.5) * 100).toFixed(1) + '%'); sh.style.setProperty('--my', ((y + 0.5) * 100).toFixed(1) + '%'); });
+    sh.addEventListener('pointerleave', () => { sh.style.setProperty('--rx', '0deg'); sh.style.setProperty('--ry', '0deg'); });
+  });
+
+  /* hero canvas: circuit traces with travelling data packets */
+  (function traces() {
+    const c = document.getElementById('traces'); const g = c.getContext('2d'); if (!g) return;
+    let W = 0, H = 0, paths = [], packets = [], raf = 0, last = 0, visible = true, cols = {};
+    function readCols() { const cs = getComputedStyle(site); cols = { line: cs.getPropertyValue('--wire').trim() || '#9aa7a1', acc: cs.getPropertyValue('--accent').trim() || '#0b6b5d' }; }
+    function build() {
+      const dpr = Math.min(2, devicePixelRatio || 1); W = c.clientWidth; H = c.clientHeight; if (!W || !H) return;
+      c.width = W * dpr; c.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const q = 28, n = Math.max(8, Math.round(W / 60)); paths = [];
+      for (let i = 0; i < n; i++) {
+        let x = Math.round(Math.random() * W / q) * q, y = Math.round(Math.random() * H / q) * q; const pts = [[x, y]]; let dir = Math.random() < 0.6 ? 0 : 1;
+        const segs = 3 + Math.floor(Math.random() * 4);
+        for (let s2 = 0; s2 < segs; s2++) { const len = q * (2 + Math.floor(Math.random() * 6)); if (dir === 0) x += (Math.random() < 0.75 ? 1 : -1) * len; else y += (Math.random() < 0.5 ? 1 : -1) * len; pts.push([x, y]); dir = 1 - dir; }
+        const seg = []; let L = 0; for (let k = 1; k < pts.length; k++) { const d = Math.abs(pts[k][0] - pts[k - 1][0]) + Math.abs(pts[k][1] - pts[k - 1][1]); seg.push(d); L += d; }
+        paths.push({ pts, seg, L });
+      }
+      packets = paths.map(p2 => ({ p: p2, t: Math.random() * p2.L, v: 45 + Math.random() * 80 }));
+    }
+    function at(p2, d) { for (let k = 0; k < p2.seg.length; k++) { if (d <= p2.seg[k]) { const a = p2.pts[k], b = p2.pts[k + 1], f = d / p2.seg[k]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; } d -= p2.seg[k]; } return p2.pts[p2.pts.length - 1]; }
+    function draw(dt) {
+      g.clearRect(0, 0, W, H); g.lineWidth = 1; g.strokeStyle = cols.line; g.fillStyle = cols.line; g.globalAlpha = 0.45;
+      paths.forEach(p2 => { g.beginPath(); p2.pts.forEach((pt, i) => i ? g.lineTo(pt[0] + 0.5, pt[1] + 0.5) : g.moveTo(pt[0] + 0.5, pt[1] + 0.5)); g.stroke(); const e = p2.pts[p2.pts.length - 1]; g.fillRect(e[0] - 2, e[1] - 2, 5, 5); const s0 = p2.pts[0]; g.strokeRect(s0[0] - 2.5, s0[1] - 2.5, 6, 6); });
+      if (dt == null) { g.globalAlpha = 1; return; }
+      g.fillStyle = cols.acc;
+      packets.forEach(pk => { pk.t += pk.v * dt; if (pk.t > pk.p.L + 80) pk.t = -30; for (let j = 0; j < 12; j++) { const d = pk.t - j * 3.5; if (d < 0 || d > pk.p.L) continue; const [x, y] = at(pk.p, d); g.globalAlpha = (1 - j / 12) * 0.95; g.fillRect(x - 1.5, y - 1.5, 3.5, 3.5); } });
+      g.globalAlpha = 1;
+    }
+    function loop(now) { const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now; draw(dt); raf = visible ? requestAnimationFrame(loop) : 0; }
+    function start() { if (reduce) { draw(null); return; } if (!raf) { last = 0; raf = requestAnimationFrame(loop); } }
+    readCols(); build(); start();
+    if ('ResizeObserver' in window) { let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { build(); if (reduce) draw(null); }, 150); }).observe(c); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) start(); }).observe(c);
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readCols(); if (reduce) draw(null); });
+    new MutationObserver(() => { readCols(); if (reduce) draw(null); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+
+  /* Hexnode diagram assembles itself before the first scenario */
+  function drawIn() {
+    if (reduce) return Promise.resolve();
+    document.querySelectorAll('#eco .n').forEach((n, k) => n.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 520, delay: k * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }));
+    document.querySelectorAll('#eco .e:not(.p2p)').forEach((e, k) => { const L = e.getTotalLength(); e.animate([{ strokeDasharray: L + ' ' + L, strokeDashoffset: L }, { strokeDasharray: L + ' ' + L, strokeDashoffset: 0 }], { duration: 700, delay: 350 + k * 60, easing: 'ease-out', fill: 'backwards' }); });
+    return wait(1300);
+  }
+
+  /* scroll-linked effects */
+  if (!reduce) {
+    const clamp = x => Math.max(0, Math.min(1, x));
+    const wide = matchMedia('(min-width: 861px)');
+    const heroText = document.querySelector('.hero-grid > div'), heroSide = document.querySelector('.hero-side'), heroCanvas = document.getElementById('traces');
+    const sheets = [...document.querySelectorAll('.sheet')], heads = [...document.querySelectorAll('.sheet h2')], tls = [...document.querySelectorAll('.tl')];
+    const figs = [...document.querySelectorAll('.shot')].filter(sh => !sh.querySelector('video')).map(sh => sh.closest('figure') || sh);
+    figs.forEach(f => f.classList.add('sc'));
+    sheets.forEach(sh => { const no = sh.querySelector('.meta .no'); if (!no) return; const w = document.createElement('div'); w.className = 'wm'; w.setAttribute('aria-hidden', 'true'); w.textContent = no.textContent; sh.prepend(w); });
+    const mqEl = document.querySelector('.marquee'), mqAnim = mq.getAnimations ? mq.getAnimations()[0] : null;
+    let lastY = scrollY, vel = 0, pending = false;
+    function frame() {
+      pending = false; const vh = innerHeight, y = scrollY;
+      if (y < vh * 1.3) {
+        heroCanvas.style.translate = '0 ' + (y * 0.45).toFixed(1) + 'px';
+        if (wide.matches) { heroText.style.translate = '0 ' + (y * 0.22).toFixed(1) + 'px'; heroSide.style.translate = '0 ' + (y * 0.1).toFixed(1) + 'px'; heroText.style.opacity = (1 - clamp(y / (vh * 0.9)) * 0.85).toFixed(3); }
+        else { heroText.style.translate = ''; heroSide.style.translate = ''; heroText.style.opacity = ''; }
+      }
+      sheets.forEach(sh => { const r = sh.getBoundingClientRect(); sh.style.setProperty('--ln', clamp((vh - r.top) / (vh * 0.5)).toFixed(3)); sh.style.setProperty('--pp', clamp((vh - r.top) / (vh + r.height)).toFixed(3)); });
+      heads.forEach(h => { const r = h.getBoundingClientRect(); h.style.setProperty('--hs', clamp((vh - r.top) / (vh * 0.45)).toFixed(3)); });
+      figs.forEach(f => { const r = f.getBoundingClientRect(); f.style.setProperty('--sp', clamp((vh - r.top) / (vh * 0.6)).toFixed(3)); });
+      tls.forEach(t => { const r = t.getBoundingClientRect(); t.style.setProperty('--tp', clamp((vh * 0.65 - r.top) / r.height).toFixed(3)); t.querySelectorAll('li').forEach(li => li.classList.toggle('lit', li.getBoundingClientRect().top < vh * 0.65)); });
+      vel = vel * 0.85 + (y - lastY) * 0.15; lastY = y;
+      if (mqAnim) mqAnim.playbackRate = 1 + Math.max(-8, Math.min(8, vel * 0.35));
+      mqEl.style.setProperty('--skew', Math.max(-12, Math.min(12, -vel * 0.4)).toFixed(2) + 'deg');
+      if (Math.abs(vel) > 0.05) req();
+    }
+    function req() { if (!pending) { pending = true; requestAnimationFrame(frame); } }
+    addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); frame();
+  }
+
+  const saved = store.get('lang');
+  if (saved === 'en' || saved === 'de') setLang(saved); else setLang('de');
+})();
+</script>
+
+</body>
+</html>
