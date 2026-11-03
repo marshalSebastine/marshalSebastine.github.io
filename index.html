@@ -103,7 +103,7 @@ p { margin: 0; }
 
 /* project index */
 .index { border-top: 1px solid var(--ink); }
-.index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.index ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .index li { border-right: 1px solid var(--line); }
 .index li:last-child { border-right: 0; }
 .index a { display: grid; gap: 6px; padding: 16px 16px 18px 0; text-decoration: none; color: var(--ink); height: 100%; }
@@ -261,10 +261,11 @@ footer .wrap { padding-block: 20px 32px; font-size: 0.82rem; color: var(--mute);
   .hero-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-side { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; align-items: start; }
   .tblock { margin-top: 0; }
-  .index ol { grid-template-columns: 1fr 1fr; }
-  .index li:nth-child(2) { border-right: 0; }
-  .index li:nth-child(n+3) { border-top: 1px solid var(--line); }
-  .index li:nth-child(3) a { padding-left: 0; }
+  .index ol { grid-template-columns: minmax(0, 1fr); }
+  .index li { border-right: 0 !important; border-top: 1px solid var(--line); }
+  .index li:first-child { border-top: 0; }
+  .index li a { padding: 12px 0 !important; grid-template-columns: 150px minmax(0, 1fr); align-items: baseline; column-gap: 16px; }
+  .index li a .d { grid-column: 2; }
   .sheet-head, .body, .cv { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .side .facts { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
   .stage { grid-template-columns: minmax(0, 1fr); }
@@ -280,10 +281,8 @@ footer .wrap { padding-block: 20px 32px; font-size: 0.82rem; color: var(--mute);
 @media (max-width: 520px) {
   .hero-side { grid-template-columns: 1fr; }
   .portrait-wrap { max-width: 200px; }
-  .index ol { grid-template-columns: 1fr; }
-  .index li { border-right: 0 !important; border-top: 1px solid var(--line); }
-  .index li:first-child { border-top: 0; }
-  .index li a { padding-left: 0 !important; }
+  .index li a { grid-template-columns: minmax(0, 1fr); }
+  .index li a .d { grid-column: 1; }
   .tl li { grid-template-columns: 1fr; gap: 2px; }
   .eco-foot { grid-template-columns: 1fr; }
 }
@@ -372,6 +371,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .copy:active, .replay:active, .lc-bar button:active, .rt-btn:active { transform: scale(.96); }
 
 
+/* Ned2 task illustration */
+.robo { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.robo-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.robo-bar .modes { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--paper); }
+.robo-bar .modes button { font: 500 0.84rem var(--f-body); border: 0; background: transparent; color: var(--ink-2); padding: 5px 12px; border-radius: 999px; cursor: pointer; transition: background .25s, color .25s; }
+.robo-bar .modes button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+#robo-canvas { display: block; width: 100%; aspect-ratio: 16 / 8; max-width: 100%; background: var(--sunk); }
+.robo-foot { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 10px 12px; border-top: 1px solid var(--line); font-size: 0.84rem; color: var(--mute); }
+.robo-foot i { display: inline-block; width: 18px; height: 0; vertical-align: middle; margin-right: 6px; border-top: 3px solid var(--ink); }
+.robo-foot i.demo { border-top: 2px dashed var(--wire); }
+.robo-foot i.pol { border-top-color: var(--accent); }
+.status { border: 1px dashed var(--wire); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 6px; max-width: 70ch; }
+.status p { color: var(--ink-2); }
+
 /* ---------- scroll-linked layer ---------- */
 .sheet { border-top: 0; position: relative; overflow: clip; }
 .sheet::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--ln, 1)); }
@@ -447,6 +460,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 <nav class="index wrap" id="projekte" aria-label="Projekte">
   <ol>
     <li><a href="#examreview"><span class="label">2026 · byte</span><span class="t">ExamReview</span><span class="d" lang="de">KI-gestützte Prüfung von Prüfungsentwürfen</span><span class="d" lang="en">AI-assisted review of exam drafts</span></a></li>
+    <li><a href="#ned2"><span class="label"><span lang="de">laufend</span><span lang="en">ongoing</span> · OTH</span><span class="t">Imitation Learning</span><span class="d" lang="de">Ein Roboterarm lernt aus Vorführungen</span><span class="d" lang="en">A robot arm learns from demonstrations</span></a></li>
     <li><a href="#smart-factory"><span class="label"><span lang="de">seit</span><span lang="en">since</span> 2025 · OTH</span><span class="t">Smart Factory</span><span class="d" lang="de">Echtzeitdaten aus einer Industrie-4.0-Anlage</span><span class="d" lang="en">Real-time data from an Industry 4.0 plant</span></a></li>
     <li><a href="#hexnode"><span class="label">2021–2024 · Mitsogo</span><span class="t"><span lang="de">Hexnode-Ökosystem</span><span lang="en">Hexnode ecosystem</span></span><span class="d" lang="de">macOS-Geräteverwaltung und Fernsteuerung</span><span class="d" lang="en">macOS device management and remote control</span></a></li>
     <li><a href="#low-code"><span class="label">2024–2025 · Ramco</span><span class="t">Low-Code Runtime</span><span class="d" lang="de">Aus JSON wird eine lauffähige Oberfläche</span><span class="d" lang="en">Turning JSON into a working interface</span></a></li>
@@ -525,12 +539,78 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   </div>
 </section>
 
+<!-- ============ NED2 IMITATION LEARNING ============ -->
+<section class="sheet" id="ned2">
+  <div class="wrap">
+    <div class="sheet-head">
+      <div class="meta">
+        <span class="no">02</span>
+        <span class="org">OTH Amberg-Weiden</span>
+        <span class="when"><span lang="de">KI-Projektmodul · WS 2026/27 · laufend</span><span lang="en">AI project module · winter 2026/27 · ongoing</span></span>
+      </div>
+      <div>
+        <h2><span lang="de">Imitation Learning am Niryo Ned2</span><span lang="en">Imitation learning on the Niryo Ned2</span></h2>
+        <p class="kicker" lang="de">Im KI-Projektmodul meines Masters bringe ich mit einem Projektpartner einem Niryo-Ned2-Roboterarm eine Aufgabe durch Vorführen bei: Er soll eine Münze entlang einer schwarzen Linie schieben. Statt die Bewegung von Hand zu programmieren, lernt der Arm sie aus Demonstrationen.</p>
+        <p class="kicker" lang="en">In the AI project module of my Master's, a project partner and I are teaching a Niryo Ned2 robot arm a task by showing it: push a coin along a black line. Instead of programming the motion by hand, the arm learns it from demonstrations.</p>
+      </div>
+    </div>
+
+    <div class="body">
+      <aside class="side">
+        <div class="facts">
+          <div class="fact"><div class="v">6</div><div class="k" lang="de">Achsen am Niryo Ned2</div><div class="k" lang="en">axes on the Niryo Ned2</div></div>
+          <div class="fact"><div class="v">2</div><div class="k" lang="de">Personen im Projektteam</div><div class="k" lang="en">people on the project team</div></div>
+        </div>
+        <div class="chips"><span class="chip">Imitation Learning</span><span class="chip">Niryo Ned2</span><span class="chip"><span lang="de">Robotik</span><span lang="en">Robotics</span></span></div>
+      </aside>
+
+      <div class="main">
+        <figure>
+          <div class="robo">
+            <div class="robo-bar">
+              <div class="modes" role="group" aria-label="Modus">
+                <button type="button" id="robo-demo" data-mode="demo" aria-pressed="true"><span lang="de">Vorführung</span><span lang="en">Demonstration</span></button>
+                <button type="button" id="robo-policy" data-mode="policy" aria-pressed="false"><span lang="de">Gelernte Policy</span><span lang="en">Learned policy</span></button>
+              </div>
+              <span class="note" lang="de">Schematische Draufsicht, keine Messdaten</span><span class="note" lang="en">Schematic top view, not measured data</span>
+            </div>
+            <canvas id="robo-canvas" role="img" aria-label="Draufsicht: Ein Roboterarm schiebt eine Münze entlang einer schwarzen Linie"></canvas>
+            <div class="robo-foot">
+              <span><i></i><span lang="de">Schwarze Linie</span><span lang="en">Black line</span></span>
+              <span><i class="demo"></i><span lang="de">Aufgezeichnete Vorführungen</span><span lang="en">Recorded demonstrations</span></span>
+              <span><i class="pol"></i><span lang="de">Spur der Münze</span><span lang="en">Coin path</span></span>
+            </div>
+          </div>
+          <figcaption lang="de">So funktioniert die Aufgabe: Vorführungen zeigen dem Arm, wie die Münze geschoben wird; daraus lernt er eine Policy, die die Bewegung selbst ausführt.</figcaption>
+          <figcaption lang="en">How the task works: demonstrations show the arm how to push the coin; from them it learns a policy that performs the motion on its own.</figcaption>
+        </figure>
+
+        <div>
+          <h3><span lang="de">Der Ansatz</span><span lang="en">The approach</span></h3>
+          <div class="flow">
+            <div class="node"><b><span lang="de">Vorführen</span><span lang="en">Demonstrate</span></b><span lang="de">Ein Mensch zeigt die Aufgabe mehrfach vor</span><span lang="en">A person performs the task several times</span></div>
+            <div class="node"><b><span lang="de">Aufzeichnen</span><span lang="en">Record</span></b><span lang="de">Beobachtungen und Bewegungen je Vorführung</span><span lang="en">Observations and motions per demonstration</span></div>
+            <div class="node me"><span class="tag"><span lang="de">Lernen</span><span lang="en">Learn</span></span><b>Policy</b><span lang="de">Ein Modell lernt, aus der Beobachtung die nächste Bewegung abzuleiten</span><span lang="en">A model learns to map what it sees to the next move</span></div>
+            <div class="node"><b><span lang="de">Ausführen</span><span lang="en">Execute</span></b><span lang="de">Der Ned2 schiebt die Münze selbstständig</span><span lang="en">The Ned2 pushes the coin on its own</span></div>
+          </div>
+        </div>
+
+        <div class="status">
+          <span class="label"><span lang="de">Stand</span><span lang="en">Status</span></span>
+          <p lang="de">Das Projekt läuft noch. Videos vom echten Arm und Ergebnisse folgen hier, sobald sie vorliegen.</p>
+          <p lang="en">The project is ongoing. Videos of the real arm and results will be added here as soon as they are available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SMART FACTORY ============ -->
 <section class="sheet" id="smart-factory">
   <div class="wrap">
     <div class="sheet-head">
       <div class="meta">
-        <span class="no">02</span>
+        <span class="no">03</span>
         <span class="org">OTH Amberg-Weiden</span>
         <span class="when"><span lang="de">seit 06/2025 · Studentische Hilfskraft</span><span lang="en">since 06/2025 · Student developer</span></span>
       </div>
@@ -588,7 +668,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   <div class="wrap">
     <div class="sheet-head">
       <div class="meta">
-        <span class="no">03</span>
+        <span class="no">04</span>
         <span class="org">Mitsogo · Hexnode UEM</span>
         <span class="when">08/2021–06/2024 · Software Engineer</span>
       </div>
@@ -680,7 +760,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   <div class="wrap">
     <div class="sheet-head">
       <div class="meta">
-        <span class="no">04</span>
+        <span class="no">05</span>
         <span class="org">Ramco Systems</span>
         <span class="when">06/2024–01/2025 · Software Engineer II</span>
       </div>
@@ -745,7 +825,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 <!-- ============ EXPERIENCE ============ -->
 <section class="sheet" id="erfahrung">
   <div class="wrap cv">
-    <div class="meta"><span class="no">05</span><h2 style="font-size:var(--step-2)"><span lang="de">Werdegang</span><span lang="en">Experience</span></h2></div>
+    <div class="meta"><span class="no">06</span><h2 style="font-size:var(--step-2)"><span lang="de">Werdegang</span><span lang="en">Experience</span></h2></div>
     <div style="display:grid; gap:40px; min-width:0">
       <ol class="tl">
         <li><span class="when">08–10/2026</span><div><b>Software Engineer Fellow · Digitalschmiede Bayern, byte</b><span lang="de">München · KI-Prüfwerkzeug ExamReview, spec-driven development</span><span lang="en">Munich · AI review tool ExamReview, spec-driven development</span></div></li>
@@ -1072,7 +1152,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   const prog = document.getElementById('progress'), topEl = document.querySelector('.top'); let ticking = false;
   function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(() => { const h = document.documentElement.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')'; topEl.classList.toggle('scrolled', scrollY > 40); ticking = false; }); }
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  const navMap = { projekte: 'projekte', examreview: 'projekte', 'smart-factory': 'projekte', hexnode: 'projekte', 'low-code': 'projekte', erfahrung: 'erfahrung', kontakt: 'kontakt' };
+  const navMap = { projekte: 'projekte', examreview: 'projekte', ned2: 'projekte', 'smart-factory': 'projekte', hexnode: 'projekte', 'low-code': 'projekte', erfahrung: 'erfahrung', kontakt: 'kontakt' };
   const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
   if ('IntersectionObserver' in window) {
     const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const key = navMap[e.target.id]; navLinks.forEach(a => a.classList.toggle('cur', a.getAttribute('href') === '#' + key)); } }), { rootMargin: '-45% 0px -50% 0px' });
@@ -1180,6 +1260,77 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     function req() { if (!pending) { pending = true; requestAnimationFrame(frame); } }
     addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); frame();
   }
+
+  /* Ned2 task illustration: top view, two-link arm pushes a coin along a line */
+  (function robo() {
+    const c = document.getElementById('robo-canvas'); const g = c && c.getContext('2d'); if (!g) return;
+    let W = 0, H = 0, mode = 'demo', t = 0, raf = 0, last = 0, visible = true, cols = {}, demos = [], trail = [], seed = 1;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    function readCols() { const cs = getComputedStyle(site); const v = k => cs.getPropertyValue(k).trim(); cols = { ink: v('--ink'), wire: v('--wire'), acc: v('--accent'), sunk: v('--sunk'), paper: v('--paper'), mute: v('--mute'), line: v('--line') }; }
+    function P(u) { /* the black line: an S-curve across the table, u in [0,1] */
+      const x = W * (0.1 + 0.8 * u); const y = H * (0.42 + 0.16 * Math.sin(u * Math.PI * 2.1 - 0.4));
+      return [x, y];
+    }
+    function tangent(u) { const a = P(Math.max(0, u - 0.002)), b = P(Math.min(1, u + 0.002)); const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1; return [dx / L, dy / L]; }
+    function wobble(u, k) { return Math.sin(u * 9 + k * 2.1) * 0.6 + Math.sin(u * 23 + k) * 0.4; }
+    function build() {
+      const dpr = Math.min(2, devicePixelRatio || 1); W = c.clientWidth; H = c.clientHeight; if (!W || !H) return;
+      c.width = W * dpr; c.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed = 7; demos = [0, 1, 2, 3].map(k => { const amp = H * (0.025 + rnd() * 0.03); const pts = []; for (let i = 0; i <= 80; i++) { const u = i / 80, p = P(u), tn = tangent(u); const off = amp * wobble(u, k); pts.push([p[0] - tn[1] * off, p[1] + tn[0] * off]); } return pts; });
+      trail = [];
+    }
+    function coinAt(u) { const p = P(u), tn = tangent(u); if (mode === 'policy') { const off = H * 0.006 * Math.sin(u * 13); return [p[0] - tn[1] * off, p[1] + tn[0] * off]; } const amp = H * 0.045; const off = amp * wobble(u, 4); return [p[0] - tn[1] * off, p[1] + tn[0] * off]; }
+    function drawArm(tx, ty) {
+      const bx = W * 0.5, by = H * 0.98, L1 = H * 0.62, L2 = H * 0.55;
+      let dx = tx - bx, dy = ty - by, d = Math.hypot(dx, dy); d = Math.min(d, L1 + L2 - 1);
+      const c2 = (d * d - L1 * L1 - L2 * L2) / (2 * L1 * L2); const q2 = Math.acos(Math.max(-1, Math.min(1, c2)));
+      const q1 = Math.atan2(dy, dx) - Math.atan2(L2 * Math.sin(q2), L1 + L2 * Math.cos(q2));
+      const ex = bx + L1 * Math.cos(q1), ey = by + L1 * Math.sin(q1);
+      const fx = ex + L2 * Math.cos(q1 + q2), fy = ey + L2 * Math.sin(q1 + q2);
+      g.lineCap = 'round';
+      g.strokeStyle = cols.wire; g.lineWidth = Math.max(10, H * 0.06); g.beginPath(); g.moveTo(bx, by); g.lineTo(ex, ey); g.stroke();
+      g.lineWidth = Math.max(7, H * 0.042); g.beginPath(); g.moveTo(ex, ey); g.lineTo(fx, fy); g.stroke();
+      g.strokeStyle = cols.paper; g.lineWidth = 1.5; g.beginPath(); g.moveTo(bx, by); g.lineTo(ex, ey); g.lineTo(fx, fy); g.stroke();
+      [[bx, by, H * 0.07], [ex, ey, H * 0.04]].forEach(([x, y, r]) => { g.fillStyle = cols.ink; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); g.fillStyle = cols.wire; g.beginPath(); g.arc(x, y, r * 0.45, 0, 7); g.fill(); });
+      g.fillStyle = cols.acc; g.beginPath(); g.arc(fx, fy, Math.max(5, H * 0.026), 0, 7); g.fill();
+    }
+    function draw(final) {
+      g.clearRect(0, 0, W, H); g.fillStyle = cols.sunk; g.fillRect(0, 0, W, H);
+      g.strokeStyle = cols.line; g.lineWidth = 1; g.globalAlpha = 0.7;
+      for (let x = 0; x < W; x += 28) { g.beginPath(); g.moveTo(x + 0.5, 0); g.lineTo(x + 0.5, H); g.stroke(); }
+      for (let y = 0; y < H; y += 28) { g.beginPath(); g.moveTo(0, y + 0.5); g.lineTo(W, y + 0.5); g.stroke(); }
+      g.globalAlpha = 1;
+      g.strokeStyle = cols.ink; g.lineWidth = Math.max(4, H * 0.02); g.lineCap = 'round'; g.beginPath();
+      for (let i = 0; i <= 120; i++) { const p = P(i / 120); i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]); } g.stroke();
+      const s0 = P(0), s1 = P(1); g.fillStyle = cols.mute; g.font = '500 11px ' + getComputedStyle(site).getPropertyValue('--f-mono');
+      g.fillText('START', s0[0] - 8, s0[1] - 16); g.fillText(lang() === 'en' ? 'GOAL' : 'ZIEL', s1[0] - 30, s1[1] - 16);
+      if (mode === 'policy') { g.setLineDash([5, 5]); g.strokeStyle = cols.wire; g.lineWidth = 1.5; g.globalAlpha = 0.6; demos.forEach(pts => { g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); g.stroke(); }); g.setLineDash([]); g.globalAlpha = 1; }
+      const u = final ? 1 : Math.min(1, t);
+      if (final) { trail = []; for (let i = 0; i <= 60; i++) trail.push(coinAt(i / 60)); }
+      g.strokeStyle = mode === 'policy' ? cols.acc : cols.wire; g.lineWidth = mode === 'policy' ? 3 : 2; if (mode === 'demo') g.setLineDash([5, 5]);
+      g.beginPath(); trail.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); g.stroke(); g.setLineDash([]);
+      const cpt = coinAt(u), tn = tangent(u), r = Math.max(8, H * 0.04);
+      const push = [cpt[0] - tn[0] * (r + H * 0.03), cpt[1] - tn[1] * (r + H * 0.03)];
+      drawArm(push[0], push[1]);
+      g.fillStyle = '#c9a13b'; g.beginPath(); g.arc(cpt[0], cpt[1], r, 0, 7); g.fill(); g.strokeStyle = '#8a6a1c'; g.lineWidth = 2; g.stroke();
+      g.strokeStyle = '#e8cf7a'; g.lineWidth = 1.2; g.beginPath(); g.arc(cpt[0], cpt[1], r * 0.62, 0, 7); g.stroke();
+    }
+    function loop(now) {
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now;
+      t += dt / 6; if (t > 1.25) { t = 0; trail = []; }
+      if (t <= 1) { const u = t; const q = coinAt(u); if (!trail.length || Math.hypot(q[0] - trail[trail.length - 1][0], q[1] - trail[trail.length - 1][1]) > 3) trail.push(q); }
+      draw(false); raf = visible ? requestAnimationFrame(loop) : 0;
+    }
+    function start() { if (reduce) { draw(true); return; } if (!raf) { last = 0; raf = requestAnimationFrame(loop); } }
+    function setMode(m) { mode = m; t = 0; trail = []; document.querySelectorAll('#ned2 [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === m))); if (reduce) draw(true); }
+    document.querySelectorAll('#ned2 [data-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    readCols(); build(); draw(true);
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) start(); }, { threshold: 0.2 }).observe(c); else start();
+    if ('ResizeObserver' in window) { let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { build(); if (reduce || !raf) draw(true); }, 120); }).observe(c); }
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readCols(); draw(reduce); });
+    new MutationObserver(() => { readCols(); draw(reduce); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    listeners.push(() => c.setAttribute('aria-label', lang() === 'en' ? 'Top view: a robot arm pushes a coin along a black line' : 'Draufsicht: Ein Roboterarm schiebt eine Münze entlang einer schwarzen Linie'));
+  })();
 
   const saved = store.get('lang');
   if (saved === 'en' || saved === 'de') setLang(saved); else setLang('de');
