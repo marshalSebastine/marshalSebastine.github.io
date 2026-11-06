@@ -1303,7 +1303,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       g.strokeStyle = cols.ink; g.lineWidth = Math.max(4, H * 0.02); g.lineCap = 'round'; g.beginPath();
       for (let i = 0; i <= 120; i++) { const p = P(i / 120); i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]); } g.stroke();
       const s0 = P(0), s1 = P(1); g.fillStyle = cols.mute; g.font = '500 11px ' + getComputedStyle(site).getPropertyValue('--f-mono');
-      g.fillText('START', s0[0] - 8, s0[1] - 16); g.fillText(lang() === 'en' ? 'GOAL' : 'ZIEL', s1[0] - 30, s1[1] - 16);
+      g.fillText('START', s0[0] - 16, s0[1] + 28); g.fillText(lang() === 'en' ? 'GOAL' : 'ZIEL', s1[0] - 14, s1[1] + 28);
       if (mode === 'policy') { g.setLineDash([5, 5]); g.strokeStyle = cols.wire; g.lineWidth = 1.5; g.globalAlpha = 0.6; demos.forEach(pts => { g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); g.stroke(); }); g.setLineDash([]); g.globalAlpha = 1; }
       const u = final ? 1 : Math.min(1, t);
       if (final) { trail = []; for (let i = 0; i <= 60; i++) trail.push(coinAt(i / 60)); }
@@ -1321,7 +1321,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       if (t <= 1) { const u = t; const q = coinAt(u); if (!trail.length || Math.hypot(q[0] - trail[trail.length - 1][0], q[1] - trail[trail.length - 1][1]) > 3) trail.push(q); }
       draw(false); raf = visible ? requestAnimationFrame(loop) : 0;
     }
-    function start() { if (reduce) { draw(true); return; } if (!raf) { last = 0; raf = requestAnimationFrame(loop); } }
+    function start() { if (reduce) { draw(true); return; } if (!raf) { last = 0; t = 0; trail = []; raf = requestAnimationFrame(loop); } }
     function setMode(m) { mode = m; t = 0; trail = []; document.querySelectorAll('#ned2 [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === m))); if (reduce) draw(true); }
     document.querySelectorAll('#ned2 [data-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
     readCols(); build(); draw(true);
