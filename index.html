@@ -643,9 +643,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
       <div class="main">
         <figure>
-          <div class="shot"><img src="media/sf-dashboard.webp" width="1600" height="859" alt="Leitstand der Smart Factory mit digitalem Zwilling, Anlagenstatus und sechs Materialflussmodulen" data-alt-en="Smart Factory control dashboard with digital twin, plant status and six material-flow modules" loading="lazy"></div>
-          <figcaption><span lang="de">Anlagenübersicht: digitaler Zwilling, Betriebsstatus, Leistungsaufnahme und je eine Kachel pro Modul.</span><span lang="en">Plant overview: digital twin, operating state, power draw and one tile per module.</span>
-            <a class="video-link" href="https://cap.so/s/nc9gfbzr4acwbh3" target="_blank" rel="noopener"><span lang="de">Video ansehen (2 Min.)</span><span lang="en">Watch the video (2 min)</span> ↗</a></figcaption>
+          <div class="shot"><video id="sf-video" class="autoplay" muted loop playsinline controls preload="none" poster="media/sf-dashboard.webp" width="1280" height="682" aria-label="Bildschirmaufnahme des Smart-Factory-Leitstands"><source src="media/smartfactory.mp4" type="video/mp4"></video></div>
+          <figcaption lang="de">Rundgang durch den Leitstand: Anlagenübersicht mit allen Modulen, Moduldetails mit Live-Verlauf und der digitale Zwilling der Anlage.</figcaption>
+          <figcaption lang="en">A tour of the control dashboard: plant overview with every module, module details with live history, and the plant's digital twin.</figcaption>
         </figure>
 
         <div>
@@ -1358,6 +1358,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     rootEl.dataset.theme = next; store.set('theme', next); syncThemeBtn();
   });
   darkMQ.addEventListener('change', syncThemeBtn); listeners.push(syncThemeBtn); syncThemeBtn();
+
+  /* muted screen recordings play only while visible */
+  document.querySelectorAll('video.autoplay').forEach(v => {
+    if (reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { v.preload = 'auto'; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } else v.pause(); }), { threshold: 0.35 }).observe(v);
+  });
 
   const saved = store.get('lang');
   if (saved === 'en' || saved === 'de') setLang(saved); else setLang('de');
